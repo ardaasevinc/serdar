@@ -15,6 +15,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
 
 class ServiceResource extends Resource
 {
@@ -30,12 +32,29 @@ class ServiceResource extends Resource
     {
         return $form
             ->schema([
+
+
+
+                Select::make('icon')
+                    ->label('İkon Seç')
+                    ->options([
+                        'icon-digital-services' => 'Dijital Hizmetler',
+                        'icon-graphic-design' => 'Tasarım',
+                        'icon-technology' => 'e-Pazarlama',
+                        'icon-web' => 'Web Geliştirme',
+                        'icon-mobile-app' => 'Mobil Uygulama',
+                    ])
+                    ->searchable()
+                    ->helperText('Bir ikon seçin, bu ikon hizmet kartında görünecektir.'),
+
+
+
                 TextInput::make('title')
                     ->label('Başlık')
                     ->required()
                     ->maxLength(255),
 
-              
+
 
                 FileUpload::make('image')
                     ->label('Görsel')
@@ -43,17 +62,25 @@ class ServiceResource extends Resource
                     ->directory('services') // Hizmet görselleri için özel klasör
                     ->imagePreviewHeight('250')
                     ->image()
+                    ->nullable()
+                    ->helperText('770x381 ölçüsünde bir görsel yükleyin.'),
+
+                RichEditor::make('content')
+                    ->label('İçerik')
+
                     ->nullable(),
 
-            RichEditor::make('content')
-                ->label('İçerik')
-
-                ->nullable(),
+                    Toggle::make('is_published')
+        ->label('Yayında mı?')
+        ->default(false),
             ]);
     }
 
     public static function table(Table $table): Table
     {
+
+        
+
         return $table
             ->columns([
                 TextColumn::make('title')->label('Başlık')->sortable()->searchable(),
@@ -66,7 +93,7 @@ class ServiceResource extends Resource
             ->emptyStateHeading('Henüz bir kayıt eklenmemiş.')
             ->emptyStateDescription('Bu alana kayıtlarınızı ekleyebilirsiniz.')
 
-            
+
             ->actions([
                 Tables\Actions\EditAction::make(),
 
@@ -78,7 +105,9 @@ class ServiceResource extends Resource
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+        
     }
+    
 
     public static function getRelations(): array
     {

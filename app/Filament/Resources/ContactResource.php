@@ -48,10 +48,9 @@ class ContactResource extends Resource
                 Textarea::make('message')
                     ->label('Mesaj')
                     ->required(),
-                Textarea::make('google_map')
-                    ->label('Google Harita Kodu')
-                    ->rows(3)
-                    ->nullable(),
+
+            
+                
             ]);
     }
 
@@ -79,6 +78,8 @@ class ContactResource extends Resource
                     ->label('Tarih')
                     ->dateTime('d.m.Y H:i')
                     ->sortable(),
+
+            
             ])
             ->filters([
                 // Gerekirse filtreler ekleyebilirsin.

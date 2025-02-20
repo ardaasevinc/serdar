@@ -37,7 +37,8 @@ class NewsResource extends Resource
                     ->directory(fn() => strtolower(class_basename(static::getModel()))) // Model ismine göre klasör belirle
                     ->getUploadedFileNameForStorageUsing(fn($file) => time() . '_' . $file->getClientOriginalName())
                     ->imagePreviewHeight('250')
-                    ->image(),
+                    ->image()
+                    ->helperText('Lütfen 770x428 çözünürlüklü bir görsel yükleyin.'),
 
                 Forms\Components\Select::make('category_id')
                     ->label('Kategori')

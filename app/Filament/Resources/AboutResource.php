@@ -44,14 +44,16 @@ class AboutResource extends Resource
                     ->directory(fn() => strtolower(class_basename(static::getModel())))
                     ->label('Görsel 1')
                     ->image()
-                    ->directory('about'),
+                    ->directory('about')
+                    ->helperText('Lütfen 400x496 çözünürlüklü bir görsel yükleyin.'),
 
 
                 Forms\Components\FileUpload::make('image2')
                     ->directory(fn() => strtolower(class_basename(static::getModel())))
                     ->label('Görsel 2')
                     ->image()
-                    ->directory('about'),
+                    ->directory('about')
+                ->helperText('Lütfen 290x316 çözünürlüklü bir görsel yükleyin.'),
 
                 Forms\Components\Toggle::make('is_published')
                     ->label('Yayında mı?')

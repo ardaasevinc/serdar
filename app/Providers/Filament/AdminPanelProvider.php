@@ -32,13 +32,13 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            ->brandLogo(asset('ibb-logo-light.svg'))
-            ->darkModeBrandLogo(asset('ibb-logo-dark.svg'))
+            ->brandLogo(asset('logo-dark.svg'))
+            ->darkModeBrandLogo(asset('logo-light.svg'))
             ->brandLogoHeight('50px')
             ->brandName('İstanbul Büyükşehir Belediyesi')
-            ->favicon(asset('ibb-logo.svg'))
+            ->favicon(asset('logo-dark.svg'))
             ->colors([
-                'primary' => '#1d428a',
+                'primary' => '#f5900d',
             ])
             
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')

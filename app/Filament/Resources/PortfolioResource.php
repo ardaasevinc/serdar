@@ -55,7 +55,7 @@ class PortfolioResource extends Resource
             ->columns([
                 TextColumn::make('title')->sortable()->searchable(),
                 TextColumn::make('category.name')->label('Kategori')->sortable(),
-                BooleanColumn::make('is_published')->label('Yayın Durumu'), // `is_active` yerine `is_published` yapıldı
+                BooleanColumn::make('is_published')->label('Yayın Durumu'), 
                 TextColumn::make('created_at')->dateTime(),
             ])
             ->filters([
@@ -64,20 +64,22 @@ class PortfolioResource extends Resource
                     ->trueLabel('Yayında')
                     ->falseLabel('Taslak'),
             ])
-            ->emptyStateIcon('heroicon-o-document') // Eğer özel ikon kullanacaksan `emptyStateIconUrl()` kullan
+            ->emptyStateIcon('heroicon-o-document') 
             ->emptyStateHeading('Henüz bir kayıt eklenmemiş.')
             ->emptyStateDescription('Bu alana kayıtlarınızı ekleyebilirsiniz.')
         ->actions([
             Tables\Actions\EditAction::make(),
 
             Tables\Actions\DeleteAction::make()
-                ->modalHeading('Silme Onayı') // Modal başlığını özelleştir
-                ->modalDescription('Bu kaydı silmek istediğinizden emin misiniz?') // Açıklama ekle
-                ->modalSubmitActionLabel('Evet, Sil') // Onay butonuna özel metin ekle
+                ->modalHeading('Silme Onayı') 
+                ->modalDescription('Bu kaydı silmek istediğinizden emin misiniz?') 
+                ->modalSubmitActionLabel('Evet, Sil') 
         ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
             ]);
+
+            
     }
 
     public static function getRelations(): array
