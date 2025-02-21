@@ -19,7 +19,7 @@
                <div class="blog-one__item__image">
                   <img src="{{ asset('uploads/'.$item->image) }}" alt="{!! Str::limit($item->title, 47) !!}">
                   <a href="{{ route('blog-detail', ['id' => $item->id]) }}"></a>
-                  <span>{{ \Carbon\Carbon::parse($item->created_at)->format('d M') }}</span>
+                  <span>{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F') }}</span>
                </div><!-- /.blog-image -->
                <div class="blog-one__item__content">
                   <div class="blog-one__item__meta has-border"><a href="blog-details.html">{{ $item->category->name }}</a><span>.</span>{{ $item->count() }}
@@ -28,7 +28,7 @@
                      <a href="{{ route('blog-detail', ['id' => $item->id]) }}">{!! Str::limit($item->title, 47) !!}
 </a>
                   </h3><!-- /.blog-title -->
-                  <a class="blog-one__item__btn" href="{{ route('blog-detail', ['id' => $item->id]) }}">Read More<span
+                  <a class="blog-one__item__btn" href="{{ route('blog-detail', ['id' => $item->id]) }}">Daha Fazlası<span
                         class="icon-down-right"></span></a><!-- /.blog-read-more -->
                </div><!-- /.blog-content -->
             </div><!-- /.blog-card-one -->

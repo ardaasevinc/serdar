@@ -12,7 +12,7 @@ class IndexController extends Controller
     {
         // Belirtilen ID'ye sahip servisi al
         $page_title = 'Hizmetlerimiz';
-        $service = Service::where('is_published', 1)->get();
+        $service = Service::where('is_published', 1)->paginate(8);
         $services = Service::findOrFail($id); // Eğer servis bulunmazsa hata döndürür
 
         // Önceki ve sonraki servisleri al

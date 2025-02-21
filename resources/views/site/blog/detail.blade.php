@@ -62,7 +62,7 @@
                                         {{ \Carbon\Carbon::parse($previousBlog->created_at)->format('d M, Y') }}</p>
                                     <h4 class="blog-details__pagenation__title">
                                         <a href="{{ route('blog-detail', ['id' => $previousBlog->id]) }}">
-                                            {{ Str::limit($previousBlog->title, 50) }}
+                                            {{ Str::limit($previousBlog->title, 40) }}
                                         </a>
                                     </h4>
                                 </div>
@@ -73,10 +73,10 @@
                             <div class="blog-details__item blog-details__item-right">
                                 <div class="blog-details__pagenation__content">
                                     <p class="blog-details__pagenation__date">
-                                        {{ \Carbon\Carbon::parse($nextBlog->created_at)->format('d M, Y') }}</p>
+                                        {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F') }}</p>
                                     <h4 class="blog-details__pagenation__title">
                                         <a href="{{ route('blog-detail', ['id' => $nextBlog->id]) }}">
-                                            {{ Str::limit($nextBlog->title, 50) }}
+                                            {{ Str::limit($nextBlog->title, 40) }}
                                         </a>
                                     </h4>
                                 </div>

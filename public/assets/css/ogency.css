@@ -4206,7 +4206,8 @@ h6 {
   -webkit-transition: -webkit-transform 400ms ease;
   transition: -webkit-transform 400ms ease;
   transition: transform 400ms ease;
-  transition: transform 400ms ease,  -webkit-transform 500ms ease;
+  transition: transform 400ms ease, 
+ -webkit-transform 500ms ease;
 }
 
 @media (max-width: 360px) {
@@ -4276,7 +4277,8 @@ h6 {
   -webkit-transition: -webkit-transform 500ms ease;
   transition: -webkit-transform 500ms ease;
   transition: transform 500ms ease;
-  transition: transform 500ms ease,  -webkit-transform 500ms ease;
+  transition: transform 500ms ease, 
+ -webkit-transform 500ms ease;
   z-index: 2;
 }
 
@@ -9770,7 +9772,7 @@ h6 {
 .project-details__image img {
   width: 100%;
   height: auto;
-  mix-blend-mode: luminosity;
+  
 }
 
 .project-details__content {

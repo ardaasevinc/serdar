@@ -13,7 +13,7 @@ class IndexController extends Controller
     {
         $page_title = 'Projeler';
         $portfolio= Portfolio::findOrFail($id);
-        $portfolios = Portfolio::where('is_published', 1)->get();
+        $portfolios = Portfolio::where('is_published', 1)->paginate(5);
 
         // Önceki ve sonraki blogları al
         $previousPortfolio = Portfolio::where('id', '<', $portfolio->id)->orderBy('id', 'desc')->first();

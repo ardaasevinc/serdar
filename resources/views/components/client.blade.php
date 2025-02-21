@@ -39,12 +39,13 @@
                 }
             }
             }'>
-            @foreach ($partners as $item )
-               
             
+               
+            @foreach ($partners as $item )
             <div class="client-carousel__one__item">
-                <img src="{{ asset('uploads/' . $item->image1) }}" alt="ogency">
-
+                
+                <img src="{{ asset('uploads/' . $item->image) }}" alt="ogency">
+                
             </div><!-- /.owl-slide-item-->
            @endforeach
 

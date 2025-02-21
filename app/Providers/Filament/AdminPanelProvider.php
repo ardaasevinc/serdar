@@ -35,7 +35,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo(asset('logo-dark.svg'))
             ->darkModeBrandLogo(asset('logo-light.svg'))
             ->brandLogoHeight('50px')
-            ->brandName('İstanbul Büyükşehir Belediyesi')
+            ->brandName('Equinoxia Web Yazılım')
             ->favicon(asset('logo-dark.svg'))
             ->colors([
                 'primary' => '#f5900d',

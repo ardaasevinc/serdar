@@ -7,9 +7,9 @@
          <div class="col-lg-6">
                         <div class="about-three__thumb">
                             <!-- about thumb start -->
-                            <div class="about-three__thumb--one wow fadeInLeft animated" data-wow-delay="300ms">
+                            {{-- <div class="about-three__thumb--one wow fadeInLeft animated" data-wow-delay="300ms">
                                 <img src="{{asset('uploads/'. $about->image2)  }}" alt="ogency">
-                            </div>
+                            </div> --}}
                             <div class="about-three__thumb--two wow fadeInLeft animated" data-wow-delay="200ms">
                                 <img src="{{asset('uploads/'. $about->image1)  }}" alt="ogency">
                             </div>

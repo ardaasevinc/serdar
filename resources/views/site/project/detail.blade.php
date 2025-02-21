@@ -1,5 +1,6 @@
 @extends('layouts.site')
 @section('content')
+@include('components.paginate')
 
 <div class="stricky-header stricked-menu main-menu">
     <div class="sticky-header__content"></div>
@@ -35,7 +36,7 @@
             <div class="col-xl-8 col-lg-7 wow fadeInLeft animated" data-wow-delay="300ms">
                 <div class="project-details__content">
                     <h3 class="project-details__content__title">{{ $portfolio->title ?? 'Başlık' }}</h3>
-                    {!! $portfolio->content ?? 'İçerik mevcut değil.' !!}
+                    {!! $portfolio->description ?? 'İçerik mevcut değil.' !!}
                 </div>
             </div>
         </div>
@@ -43,13 +44,13 @@
         <div class="project-details__pagination wow fadeInUp animated" data-wow-delay="400ms">
             @if (!empty($previousPortfolio))
                 <a class="project-details__pagination__previous" href="{{ route('project-detail', ['id' => $previousPortfolio->id]) }}">
-                    <span class="icon-left-arrow"></span>Previous
+                    <span class="icon-left-arrow"></span>Önceki
                 </a>
             @endif
 
             @if (!empty($nextPortfolio))
                 <a class="project-details__pagination__next" href="{{ route('project-detail', ['id' => $nextPortfolio->id]) }}">
-                    Next<span class="icon-right-arrow"></span>
+                    Sonraki<span class="icon-right-arrow"></span>
                 </a>
             @endif
         </div>
@@ -74,7 +75,8 @@
 
                         <div class="project-two__item__content">
                             <p class="project-two__item__content__cats">
-                                <a href="test</a>
+                               <a href="test">{{ $item->category->name ?? 'Kategori Yok' }}</a>
+
                             </p>
                             <h3 class="project-two__item__content__title">
                                 <a href="{{ route('project-detail', ['id' => $item->id]) }}">{{ $item->title }}</a>
@@ -84,6 +86,10 @@
                 </div>
             @endforeach
         </div>
+        <!-- Sayfalama Butonları -->
+<div class="pagination-wrapper mt-5 mb-2">
+    {{ $portfolios->links() }}
+</div>
     </div>
 </section>
 <!-- Projects Details End -->

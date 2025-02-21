@@ -50,7 +50,7 @@
                                 <input type="text" placeholder="Telefon Numaranız" name="phone_number" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="contact-one__input-box">
                                 <input type="text" placeholder="Konu" name="subject" required>
                             </div>

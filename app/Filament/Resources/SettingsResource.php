@@ -38,11 +38,11 @@ class SettingsResource extends Resource
         return $form
             ->schema([
                 TextInput::make('site_name')->label('Site Adı')->required(),
-            TextInput::make('site_email')->label('E-posta'),
+                TextInput::make('site_email')->label('E-posta'),
                 FileUpload::make('site_logo')->label('Site Logosu')->disk('public')->directory('settings'),
                 FileUpload::make('favicon')->label('Favicon')->disk('public')->directory('settings'),
 
-                
+
                 TextInput::make('site_phone')->label('Telefon'),
                 Textarea::make('site_address')->label('Adres'),
 
@@ -60,45 +60,42 @@ class SettingsResource extends Resource
                 TextInput::make('linkedin_url')->label('LinkedIn URL'),
                 TextInput::make('youtube_url')->label('YouTube URL'),
 
-                Textarea::make('google_tag_manager')
+                TextInput::make('google_tag_manager')
                     ->label('Google Tag Manager')
-                    ->rows(5)
-                    ->extraAttributes(['style' => 'font-family: monospace; background-color: #1e1e1e; color: #d4d4d4;'])
-                    ->columnSpan('full'),
+                    ->columnSpan('full')
+                    ->helperText('Google Tag Manager Kodunu giriniz. GTM-XXXXXX'),
 
-                Textarea::make('google_analytics')
+                TextInput::make('google_analytics')
                     ->label('Google Analytics')
-                    ->rows(5)
-                    ->extraAttributes(['style' => 'font-family: monospace; background-color: #1e1e1e; color: #d4d4d4;'])
-                    ->columnSpan('full'),
-                Textarea::make('facebook_pixel')
-                    ->label('Facebook Piksel')
-                    ->rows(5)
-                    ->extraAttributes(['style' => 'font-family: monospace; background-color: #1e1e1e; color: #d4d4d4;'])
-                    ->columnSpan('full'),
+                    ->columnSpan('full')
+                    ->helperText('Google Analytics Kodunu yazınız. G-XXXXXXXXXX'),
 
-                Textarea::make('tiktok_pixel')
+                TextInput::make('facebook_pixel')
+                    ->label('Facebook Piksel')
+                    ->columnSpan('full')
+                    ->helperText('Facebook Pixel Kodunu yazınız. 123456789012345'),
+
+                TextInput::make('tiktok_pixel')
                     ->label('TikTok Piksel')
-                    ->rows(5)
-                    ->extraAttributes(['style' => 'font-family: monospace; background-color: #1e1e1e; color: #d4d4d4;'])
-                    ->columnSpan('full'),
+                    ->columnSpan('full')
+                    ->helperText('Tiktok Pixel Kodunu yazınız. ABCDEF1234567890'),
 
                 Textarea::make('custom_css')
                     ->label('Özel CSS')
                     ->rows(5)
-                    ->extraAttributes(['style' => 'font-family: monospace; background-color: #1e1e1e; color: #d4d4d4;'])
+                    ->extraAttributes(['style' => 'font-family: monospace; '])
                     ->columnSpan('full'),
 
                 Textarea::make('custom_js')
                     ->label('Özel JavaScript')
                     ->rows(5)
-                    ->extraAttributes(['style' => 'font-family: monospace; background-color: #1e1e1e; color: #d4d4d4;'])
+                    ->extraAttributes(['style' => 'font-family: monospace; '])
                     ->columnSpan('full'),
 
 
-               
+
                 RichEditor::make('maintenance_message')->label('Bakım Modu Mesajı')->extraAttributes(['rows' => 3])->columnSpan('full'),
-            Toggle::make('maintenance_mode')->label('Bakım Modu'),
+                Toggle::make('maintenance_mode')->label('Bakım Modu'),
             ]);
     }
 

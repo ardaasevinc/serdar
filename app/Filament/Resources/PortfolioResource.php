@@ -6,6 +6,7 @@ use App\Filament\Resources\PortfolioResource\Pages;
 use App\Models\Portfolio;
 use App\Models\PortfolioCategory;
 use Filament\Forms;
+use Filament\Forms\Components\RichEditor;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Forms\Components\TextInput;
@@ -35,7 +36,7 @@ class PortfolioResource extends Resource
                 TextInput::make('title')
                     ->required()
                     ->maxLength(255),
-                Textarea::make('description'),
+                RichEditor::make('description'),
                 Select::make('portfolio_category_id')
                     ->label('Kategori')
                     ->options(PortfolioCategory::query()->pluck('name', 'id')) // `toArray()` kaldırıldı

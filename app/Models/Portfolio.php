@@ -36,6 +36,6 @@ class Portfolio extends Model implements HasMedia
 
     public function category()
     {
-        return $this->belongsTo(PortfolioCategory::class);
+        return $this->belongsTo(PortfolioCategory::class,'portfolio_category_id');
     }
 }

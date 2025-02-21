@@ -39,7 +39,7 @@
                   <div class="project-one__item__hover">
                        @foreach ($item->getMedia('portfolio_images') as $image)
 
-                                <img src="{{ asset('uploads/' . $item->id . '/' . $image->file_name) }}"
+                                <img src="{{ asset('uploads/' . $image->id . '/' . $image->file_name) }}"
                                     alt="Portfolio Image">
                             @endforeach</div>
                   <!-- /.project-hover-image -->

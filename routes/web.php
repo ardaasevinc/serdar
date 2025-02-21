@@ -12,6 +12,10 @@ use App\Http\Controllers\Site\Blogs\IndexController as BlogsController;
 use App\Http\Controllers\Site\Contact\IndexController as ContactController;
 use App\Http\Controllers\Site\Search\IndexController as SearchController;
 
+
+use App\Http\Controllers\SitemapController;
+use App\Http\Controllers\RobotsController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +26,12 @@ use App\Http\Controllers\Site\Search\IndexController as SearchController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('site.sitemap');
+Route::get('/robots.txt', [RobotsController::class, 'index'])->name('site.robots');
+
+
 
 Route::get('/', [IndexController::class, 'index'])->name('site.index');
 Route::get('/about', [AboutController::class, 'index'])->name('site.about');

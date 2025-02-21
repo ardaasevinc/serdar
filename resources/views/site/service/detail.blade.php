@@ -1,6 +1,7 @@
 @extends('layouts.site')
 
 @section('content')
+@include('components.paginate')
 <div class="stricky-header stricked-menu main-menu">
     <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
 </div><!-- /.stricky-header -->
@@ -62,10 +63,17 @@
                             <img src="{{ asset('uploads/'.$services->image) }}" alt="{{ $services->title }}">
                         </div>
                     @endif
+                    <div class="">
+                           <h3>{{ $services->title }}</h3> 
+                        </div>
                     {!! $services->content !!}
                 </div>
             </div>
         </div>
+        <!-- Sayfalama Butonları -->
+<div class="pagination-wrapper mt-5 mb-2">
+    {{ $service->links() }}
+</div>
     </div>
 </section>
 <!-- Services Details End -->

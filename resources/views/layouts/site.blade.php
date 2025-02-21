@@ -9,9 +9,9 @@
 
     <!-- Favicon -->
     @if (!empty($settings->site_favicon))
-        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('uploads/' . $settings->site_favicon) }}" />
-        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('uploads/' . $settings->site_favicon) }}" />
-        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('uploads/' . $settings->site_favicon) }}" />
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('uploads/' . $settings->favicon) }}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('uploads/' . $settings->favicon) }}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('uploads/' . $settings->favicon) }}" />
     @endif
     <link rel="manifest" href="{{ asset('assets/images/favicons/site.webmanifest') }}" />
 
@@ -93,10 +93,10 @@
 
 
     <!-- fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-        rel="stylesheet" />
+        rel="stylesheet" crossorigin/>
 
 
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap/css/bootstrap.min.css') }}" />
@@ -141,7 +141,7 @@
         <section class="cta-one">
             <div class="container text-center wow fadeInUp animated" data-wow-delay="200ms">
                 <div class="cta-one__author">
-                    <div class="cta-one__author--wrap"><img src="{{ asset('assets/images/resources/photo91.png') }}"
+                    <div class="cta-one__author--wrap"><img src="{{ asset('assets/images/resources/photo91.png') }}" loading="lazy"
                             alt="ogency">
                     </div>
                     <a href="contact.html" class="cta-one__icon"><span class="icon-arrow-long"></span></a>
@@ -224,7 +224,7 @@
         <div class="mobile-nav__content">
             <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
             <div class="logo-box">
-                <a href="index.html" aria-label="logo image"><img src="assets/images/logo-light.png" width="36"
+                <a href="{{ route('site.index') }}" loading="lazy"s aria-label="logo image"><img src="{{ asset('uploads/'. $settings->site_logo) }}" width="36"
                         alt="ogency" /></a>
             </div>
             <!-- /.logo-box -->
