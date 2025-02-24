@@ -34,4 +34,9 @@ return [
 
     ],
 
+    'pagination' => [
+        'previous' => 'Önceki',
+        'next' => 'Sonraki',
+    ],
+
 ];

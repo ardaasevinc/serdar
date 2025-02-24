@@ -40,6 +40,6 @@ class IndexController extends Controller
         ->where('is_published', 1)
         ->paginate(4);
 
-        return view('site.search.results', compact('query', 'blogs', 'services', 'portfolios'));
+        return view('site.search.results', compact('query', 'blogs', 'services', 'portfolios','page-title'));
     }
 }

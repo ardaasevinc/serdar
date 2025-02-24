@@ -5,23 +5,7 @@
 @include('components.paginate')
 
 @if(!empty($portfolio))
-<div class="stricky-header stricked-menu main-menu">
-            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
-        </div><!-- /.stricky-header -->
-        <section class="page-header">
-            <div class="page-header__bg">
-            </div>
-            <!-- /.page-header__bg -->
-            <div class="page-header__overlay"></div>
-            <!-- /.page-header__bg -->
-            <div class="container">
-                <ul class="page-header__breadcrumb list-unstyled">
-                    <li><a href="index.html">Anasayfa</a></li>
-                    <li><span>{{ $page_title }}</span></li>
-                </ul><!-- /.page-breadcrumb list-unstyled -->
-                <h2 class="page-header__title">{{ $page_title }}</h2><!-- /.page-title -->
-            </div><!-- /.container -->
-        </section><!-- /.page-header -->
+@include('components.page-header')
 <!-- Project Start -->
 <section class="project-one @@extraClassName" id="projelerimiz">
    <div class="container">
@@ -39,7 +23,7 @@
                   <div class="project-one__item__hover">
                        @foreach ($item->getMedia('portfolio_images') as $image)
 
-                                <img src="{{ asset('uploads/' . $image->id . '/' . $image->file_name) }}"
+                                <img src="{{ asset('uploads/' . $image->id . '/' . $image->file_name) }}" loading="lazy"
                                     alt="Portfolio Image">
                             @endforeach</div>
                   <!-- /.project-hover-image -->

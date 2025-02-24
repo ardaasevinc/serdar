@@ -2,21 +2,7 @@
 
 @section('content')
 @include('components.paginate')
-<div class="stricky-header stricked-menu main-menu">
-    <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
-</div><!-- /.stricky-header -->
-
-<section class="page-header">
-    <div class="page-header__bg"></div>
-    <div class="page-header__overlay"></div>
-    <div class="container">
-        <ul class="page-header__breadcrumb list-unstyled">
-            <li><a href="{{ route('site.index') }}">Anasayfa</a></li>
-            <li><span>{{ $page_title }}</span></li>
-        </ul>
-        <h2 class="page-header__title">{{ $page_title }}</h2>
-    </div>
-</section>
+@include('components.page-header')
 
 <!-- Services Details Start -->
 <section class="services-details">
@@ -60,7 +46,7 @@
                 <div class="services-details__content">
                     @if ($services->image)
                         <div class="services-details__thumb">
-                            <img src="{{ asset('uploads/'.$services->image) }}" alt="{{ $services->title }}">
+                            <img src="{{ asset('uploads/'.$services->image) }}"  loading="lazy" alt="{{ $services->title }}">
                         </div>
                     @endif
                     <div class="">

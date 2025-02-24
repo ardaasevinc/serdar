@@ -13,7 +13,7 @@
                         <div class="feature-one__item__img">
 
                             @foreach ($item->getMedia('portfolio_images') as $image)
-                                <img src="{{ asset('uploads/' . $item->id . '/' . $image->file_name) }}"
+                                <img src="{{ asset('uploads/' . $item->id . '/' . $image->file_name) }}" loading="lazy"
                                     alt="Portfolio Image">
                             @endforeach
 

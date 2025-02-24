@@ -1,22 +1,6 @@
 @extends('layouts.site')
 @section('content')
-<div class="stricky-header stricked-menu main-menu">
-            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
-        </div><!-- /.stricky-header -->
-        <section class="page-header">
-            <div class="page-header__bg">
-            </div>
-            <!-- /.page-header__bg -->
-            <div class="page-header__overlay"></div>
-            <!-- /.page-header__bg -->
-            <div class="container">
-                <ul class="page-header__breadcrumb list-unstyled">
-                    <li><a href="index.html">Anasayfa</a></li>
-                    <li><span>{{ $page_title }}</span></li>
-                </ul><!-- /.page-breadcrumb list-unstyled -->
-                <h2 class="page-header__title">{{ $page_title }}</h2><!-- /.page-title -->
-            </div><!-- /.container -->
-        </section><!-- /.page-header -->
+@include('components.page-header')
     <!--Blog Start-->
     <section class="blog-details">
         <div class="container">
@@ -24,7 +8,7 @@
                 <div class="col-xl-8 col-lg-7">
                     <div class="blog-details__content">
                         <div class="blog-details__img">
-                            <img src="{{ asset('uploads/' . $blog->image) }}" alt="{!! Str::limit($blog->title, 47) !!}" />
+                            <img src="{{ asset('uploads/' . $blog->image) }}" loading="lazy" alt="{!! Str::limit($blog->title, 47) !!}" />
                             <span
                                 class="blog-details__img__date">{{ \Carbon\Carbon::parse($blog->created_at)->format('d M') }}</span>
                         </div><!-- details-image -->
@@ -73,7 +57,7 @@
                             <div class="blog-details__item blog-details__item-right">
                                 <div class="blog-details__pagenation__content">
                                     <p class="blog-details__pagenation__date">
-                                        {{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F') }}</p>
+                                        {{ \Carbon\Carbon::parse($blog->created_at)->translatedFormat('d F') }}</p>
                                     <h4 class="blog-details__pagenation__title">
                                         <a href="{{ route('blog-detail', ['id' => $nextBlog->id]) }}">
                                             {{ Str::limit($nextBlog->title, 40) }}

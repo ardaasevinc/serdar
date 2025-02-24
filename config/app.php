@@ -160,6 +160,14 @@ return [
          * Package Service Providers...
          */
 
+        Filament\FilamentServiceProvider::class,
+        Filament\Forms\FormsServiceProvider::class,
+        Filament\Tables\TablesServiceProvider::class,
+        Filament\Widgets\WidgetsServiceProvider::class,
+        Filament\Notifications\NotificationsServiceProvider::class,
+        Filament\Support\SupportServiceProvider::class,
+
+
         /*
          * Application Service Providers...
          */

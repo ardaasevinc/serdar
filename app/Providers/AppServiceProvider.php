@@ -21,9 +21,9 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */ public function boot(): void
     {
-       
-    $settings = Settings::first(); // Eğer tek bir ayar kaydınız varsa
-              View::share('settings', $settings);
+
+        $settings = Settings::first(); // Eğer tek bir ayar kaydınız varsa
+        View::share('settings', $settings);
 
         Paginator::useBootstrapFive(); // Bootstrap 5 için sayfalama stilini uygula
     }

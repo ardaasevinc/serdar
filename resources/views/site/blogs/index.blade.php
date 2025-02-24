@@ -3,23 +3,7 @@
 @section('content')
 
 @include('components.paginate')
-<div class="stricky-header stricked-menu main-menu">
-            <div class="sticky-header__content"></div><!-- /.sticky-header__content -->
-        </div><!-- /.stricky-header -->
-        <section class="page-header">
-            <div class="page-header__bg">
-            </div>
-            <!-- /.page-header__bg -->
-            <div class="page-header__overlay"></div>
-            <!-- /.page-header__bg -->
-            <div class="container">
-                <ul class="page-header__breadcrumb list-unstyled">
-                    <li><a href="index.html">Anasayfa</a></li>
-                    <li><span>{{ $page_title }}</span></li>
-                </ul><!-- /.page-breadcrumb list-unstyled -->
-                <h2 class="page-header__title">{{ $page_title }}</h2><!-- /.page-title -->
-            </div><!-- /.container -->
-        </section><!-- /.page-header -->
+@include('components.page-header')
 
 
         @if(!empty($blog))
@@ -32,7 +16,7 @@
         <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="200ms">
             <div class="blog-one__item">
                 <div class="blog-one__item__image">
-                    <img src="{{ asset('uploads/'.$item->image) }}" alt="{!! Str::limit($item->title, 47) !!}">
+                    <img src="{{ asset('uploads/'.$item->image) }}" loading="lazy" alt="{!! Str::limit($item->title, 47) !!}">
                     <a href="{{ route('blog-detail', ['id' => $item->id]) }}"></a>
                     <span>{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F') }}</span>
 

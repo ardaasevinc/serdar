@@ -1,21 +1,7 @@
 @extends('layouts.site')
 
 @section('content')
-<div class="stricky-header stricked-menu main-menu">
-    <div class="sticky-header__content"></div>
-</div>
-
-<section class="page-header">
-    <div class="page-header__bg"></div>
-    <div class="page-header__overlay"></div>
-    <div class="container">
-        <ul class="page-header__breadcrumb list-unstyled">
-            <li><a href="{{ route('site.index') }}">Anasayfa</a></li>
-            <li><span>{{ $page_title }}</span></li>
-        </ul>
-        <h2 class="page-header__title">{{ $page_title }}</h2>
-    </div>
-</section>
+@include('components.page-header')
 
 <!-- Contact Start -->
 <section class="contact-two">

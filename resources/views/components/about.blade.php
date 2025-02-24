@@ -11,7 +11,7 @@
                                 <img src="{{asset('uploads/'. $about->image2)  }}" alt="ogency">
                             </div> --}}
                             <div class="about-three__thumb--two wow fadeInLeft animated" data-wow-delay="200ms">
-                                <img src="{{asset('uploads/'. $about->image1)  }}" alt="ogency">
+                              <img src="{{asset('uploads/'. $about->image1)  }}" loading="lazy" alt="ogency">
                             </div>
                         </div><!-- about thumb end -->
                     </div>

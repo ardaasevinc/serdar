@@ -15,6 +15,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Forms\Components\RichEditor;
 
 class SliderResource extends Resource
 {
@@ -30,7 +31,7 @@ class SliderResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title1')
+                RichEditor::make('title1')
                     ->label('Başlık 1')
                     ->required()
                     ->maxLength(255),

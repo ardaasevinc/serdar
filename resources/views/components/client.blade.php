@@ -41,13 +41,13 @@
             }'>
             
                
-            @foreach ($partners as $item )
+            
             <div class="client-carousel__one__item">
-                
-                <img src="{{ asset('uploads/' . $item->image) }}" alt="ogency">
-                
+                @foreach ($partners as $item )
+                <a href="{{ $item->url }}"><img src="{{ asset('uploads/' . $item->image) }}" loading="lazy" alt="ogency"></a>
+                @endforeach
             </div><!-- /.owl-slide-item-->
-           @endforeach
+           
 
         </div><!-- /.thm-owl__slider -->
     </div><!-- /.container -->

@@ -11,6 +11,8 @@ use App\Http\Controllers\Site\Services\IndexController as ServicesController;
 use App\Http\Controllers\Site\Blogs\IndexController as BlogsController;
 use App\Http\Controllers\Site\Contact\IndexController as ContactController;
 use App\Http\Controllers\Site\Search\IndexController as SearchController;
+use App\Http\Controllers\Site\Page\IndexController as PageController;
+
 
 
 use App\Http\Controllers\SitemapController;
@@ -44,6 +46,11 @@ route::get('/search', [SearchController::class, 'index'])->name('site.search');
 
 
 
+
+
+
+
+Route::get('/page/{slug}', [PageController::class, 'detail'])->name('page-detail');
 
 
 
