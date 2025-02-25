@@ -13,8 +13,6 @@ use App\Http\Controllers\Site\Contact\IndexController as ContactController;
 use App\Http\Controllers\Site\Search\IndexController as SearchController;
 use App\Http\Controllers\Site\Page\IndexController as PageController;
 
-
-
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RobotsController;
 
@@ -57,6 +55,8 @@ Route::get('/page/{slug}', [PageController::class, 'detail'])->name('page-detail
 Route::get('/blog-detail/{id}', [BlogController::class, 'index'])->name('blog-detail');
 Route::get('/project-detail/{id}', [ProjectController::class, 'index'])->name('project-detail');
 Route::get('/service-detail/{id}', [ServiceController::class, 'index'])->name('service-detail');
+
+
 
 
 

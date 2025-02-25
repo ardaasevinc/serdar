@@ -16,8 +16,17 @@ use Filament\Tables\Columns\IconColumn;
 class PageResource extends Resource
 {
     protected static ?string $model = Page::class;
+    
 
     protected static ?string $navigationGroup = 'İçerik Yönetimi';
+
+    protected static ?string $pluralModelLabel = 'Sayfalar';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationLabel = 'Sayfalar';
+   
+    protected static ?string $modelLabel = 'Sayfa';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Forms\Form $form): Forms\Form
     {

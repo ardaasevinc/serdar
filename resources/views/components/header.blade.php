@@ -40,18 +40,18 @@
                                             <a href="{{ route('page-detail', ['slug' => $submenu->slug]) }}">
                                                 {{ $submenu->title }}
                                             </a>
-
-                                            @if ($submenu->contents->count())
+                                            {{-- @if ($submenu->parent_id == $currentPage->id && $submenu->contents->count())
                                                 <ul class="submenu-content">
                                                     @foreach ($submenu->contents as $content)
                                                         <li>
-                                                            <a href="#">
+                                                            <a href="{{ route('page.show', $content->slug) }}">
                                                                 {{ $content->title }}
                                                             </a>
                                                         </li>
                                                     @endforeach
                                                 </ul>
-                                            @endif
+                                            @endif --}}
+
                                         </li>
                                     @endforeach
                                 </ul>

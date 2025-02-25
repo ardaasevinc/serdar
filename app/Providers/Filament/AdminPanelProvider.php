@@ -1,5 +1,7 @@
 <?php
 
+
+
 namespace App\Providers\Filament;
 
 use Filament\Facades\Filament;
@@ -26,29 +28,18 @@ use App\Filament\Widgets\ContactMessagesWidget;
 
 
 
-
-
-
-
-
-
-
 class AdminPanelProvider extends PanelProvider
 {
-
-  
-
 
 
 
     public function panel(Panel $panel): Panel
     {
-
-
         return $panel
-
-            ->default()
             ->id('admin')
+            ->path('admin')
+            
+            ->default()
             ->path('admin')
             ->login()
             ->brandLogo(asset('logo-dark.svg'))
@@ -59,11 +50,6 @@ class AdminPanelProvider extends PanelProvider
             ->colors([
                 'primary' => '#f5900d',
             ])
-
-
-      
-
-
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
@@ -74,11 +60,8 @@ class AdminPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
                 ContactMessagesWidget::class,
-                
             ])
-
             ->middleware([
-                
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
                 StartSession::class,
@@ -91,14 +74,15 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-
-
-
             ]);
     }
 
+
+
+
+
     
 
+        
+    }
 
-
-}

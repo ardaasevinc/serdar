@@ -29,6 +29,7 @@ class PageContentResource extends Resource
     protected static ?string $navigationLabel = 'Sayfa İçerik Yönetimi';
     protected static ?string $navigationGroup = 'İçerik Yönetimi';
     protected static ?string $modelLabel = 'İçerik';
+    protected static ?int $navigationSort = 2;
 
     public static function form(Forms\Form $form): Forms\Form
     {

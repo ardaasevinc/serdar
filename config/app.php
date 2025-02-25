@@ -160,6 +160,7 @@ return [
          * Package Service Providers...
          */
 
+        App\Providers\FortifyServiceProvider::class,
         Filament\FilamentServiceProvider::class,
         Filament\Forms\FormsServiceProvider::class,
         Filament\Tables\TablesServiceProvider::class,
@@ -177,6 +178,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\Filament\AdminPanelProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\FortifyServiceProvider::class,
+       
     ])->toArray(),
 
     /*
