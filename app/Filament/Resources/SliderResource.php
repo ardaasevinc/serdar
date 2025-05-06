@@ -31,31 +31,37 @@ class SliderResource extends Resource
     {
         return $form
             ->schema([
-                RichEditor::make('title1')
-                    ->label('Başlık 1')
-                    ->required()
-                    ->maxLength(255),
-
-                TextInput::make('title2')
-                    ->label('Başlık 2')
-                    ->maxLength(255),
-
-                Textarea::make('content')
-                    ->label('İçerik')
-                    ->rows(3)
-                    ->nullable(),
-
-                FileUpload::make('image')
-                    ->label('Görsel')
-                    ->disk('public') // Public disk kullanıyoruz
-                    ->directory('sliders') // Slider görselleri için özel klasör
-                    ->imagePreviewHeight('250')
-                    ->image()
-                    ->nullable(),
+                Forms\Components\Grid::make(12)
+                    ->schema([
+                        FileUpload::make('image')
+                            ->label('Görsel')
+                            ->disk('uploads')
+                            ->directory('sliders')
+                            ->visibility('public')
+                            ->imagePreviewHeight('250')
+                            ->image()
+                            ->nullable()
+                            ->columnSpan(4), // Solda 4 kolon kaplasın
+    
+                        Forms\Components\Group::make([
+                            RichEditor::make('title1')
+                                ->label('Başlık 1')
+                                ->required()
+                                ->maxLength(255),
+    
+                            TextInput::make('title2')
+                                ->label('Başlık 2')
+                                ->maxLength(255),
+    
+                            Textarea::make('content')
+                                ->label('İçerik')
+                                ->rows(3)
+                                ->nullable(),
+                        ])->columnSpan(8), // Sağda 8 kolon kaplasın
+                    ]),
             ]);
-            
     }
-
+    
     public static function table(Table $table): Table
     {
         

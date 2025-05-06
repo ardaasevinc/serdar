@@ -21,7 +21,7 @@ class PortfolioCategoryResource extends Resource
     protected static ?string $slug = 'portfolio-categories';
 
     protected static ?string $modelLabel = 'Portfolio Kategori';
-    protected static ?string $navigationGroup = 'İçerik Yönetimi';
+    protected static ?string $navigationGroup = 'Portfolyo Yönetimi';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -47,8 +47,8 @@ class PortfolioCategoryResource extends Resource
         
 
             ->emptyStateIcon(asset('custom-empty.svg'))
-            ->emptyStateHeading('Henüz bir kayıt eklenmemiş.')
-            ->emptyStateDescription('Bu alana kayıtlarınızı ekleyebilirsiniz.')
+            ->emptyStateHeading('Henüz bir portfolyo kategorisi eklenmemiş.')
+            ->emptyStateDescription('Bu alanda portfolyo kategorileriniz listeleyebilirsiniz.')
 
             
             ->actions([

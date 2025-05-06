@@ -35,31 +35,40 @@ class PageContentResource extends Resource
     {
         return $form
             ->schema([
-                Select::make('page_id')
-                    ->relationship('page', 'title')
-                    ->label('Bağlı Sayfa')
-                    ->required(),
-
-                TextInput::make('title')
-                    ->label('Başlık')
-                    ->required()
-                    ->maxLength(255),
-
-                RichEditor::make('content')
-                    ->label('İçerik')
-                    ->required(),
-
-                FileUpload::make('image')
-                    ->label('Görsel')
-                    ->image(),
-
-                TextInput::make('order')
-                    ->label('Sıra')
-                    ->numeric()
-                    ->default(0),
+                Forms\Components\Grid::make(12)
+                    ->schema([
+                        Forms\Components\Group::make([
+                            FileUpload::make('image')
+                                ->label('Görsel')
+                                ->image(),
+                        ])
+                        ->columnSpan(4), // Sol 4 kolon: Görsel
+    
+                        Forms\Components\Group::make([
+                            Select::make('page_id')
+                                ->relationship('page', 'title')
+                                ->label('Bağlı Sayfa')
+                                ->required(),
+    
+                            TextInput::make('title')
+                                ->label('Başlık')
+                                ->required()
+                                ->maxLength(255),
+    
+                            RichEditor::make('content')
+                                ->label('İçerik')
+                                ->required(),
+    
+                            TextInput::make('order')
+                                ->label('Sıra')
+                                ->numeric()
+                                ->default(0),
+                        ])
+                        ->columnSpan(8), // Sağ 8 kolon: Diğer alanlar
+                    ]),
             ]);
     }
-
+    
     public static function table(Tables\Table $table): Tables\Table
     {
         return $table
@@ -87,6 +96,12 @@ class PageContentResource extends Resource
                     ->relationship('page', 'title')
                     ->label('Sayfaya Göre Filtrele'),
             ])
+
+            ->emptyStateIcon(asset('custom-empty.svg'))
+            ->emptyStateHeading('Henüz bir sayfa içeriği eklenmemiş.')
+            ->emptyStateDescription('Bu alana sayfa içeriği ekleyebilirsiniz.Unutmayın, içerik eklemeden önce sayfa oluşturmalısınız.')
+
+
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),

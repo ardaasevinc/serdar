@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396
+class ComposerStaticInit1b5fa06cab8db64f3be3edf27f3af88a
 {
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
@@ -900,6 +900,10 @@ class ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396
         'App\\Filament\\Resources\\DataResource\\Pages\\CreateData' => __DIR__ . '/../..' . '/app/Filament/Resources/DataResource/Pages/CreateData.php',
         'App\\Filament\\Resources\\DataResource\\Pages\\EditData' => __DIR__ . '/../..' . '/app/Filament/Resources/DataResource/Pages/EditData.php',
         'App\\Filament\\Resources\\DataResource\\Pages\\ListData' => __DIR__ . '/../..' . '/app/Filament/Resources/DataResource/Pages/ListData.php',
+        'App\\Filament\\Resources\\FaqResource' => __DIR__ . '/../..' . '/app/Filament/Resources/FaqResource.php',
+        'App\\Filament\\Resources\\FaqResource\\Pages\\CreateFaq' => __DIR__ . '/../..' . '/app/Filament/Resources/FaqResource/Pages/CreateFaq.php',
+        'App\\Filament\\Resources\\FaqResource\\Pages\\EditFaq' => __DIR__ . '/../..' . '/app/Filament/Resources/FaqResource/Pages/EditFaq.php',
+        'App\\Filament\\Resources\\FaqResource\\Pages\\ListFaqs' => __DIR__ . '/../..' . '/app/Filament/Resources/FaqResource/Pages/ListFaqs.php',
         'App\\Filament\\Resources\\NewsResource' => __DIR__ . '/../..' . '/app/Filament/Resources/NewsResource.php',
         'App\\Filament\\Resources\\NewsResource\\Pages\\CreateNews' => __DIR__ . '/../..' . '/app/Filament/Resources/NewsResource/Pages/CreateNews.php',
         'App\\Filament\\Resources\\NewsResource\\Pages\\EditNews' => __DIR__ . '/../..' . '/app/Filament/Resources/NewsResource/Pages/EditNews.php',
@@ -940,6 +944,10 @@ class ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396
         'App\\Filament\\Resources\\SlidetextResource\\Pages\\CreateSlidetext' => __DIR__ . '/../..' . '/app/Filament/Resources/SlidetextResource/Pages/CreateSlidetext.php',
         'App\\Filament\\Resources\\SlidetextResource\\Pages\\EditSlidetext' => __DIR__ . '/../..' . '/app/Filament/Resources/SlidetextResource/Pages/EditSlidetext.php',
         'App\\Filament\\Resources\\SlidetextResource\\Pages\\ListSlidetexts' => __DIR__ . '/../..' . '/app/Filament/Resources/SlidetextResource/Pages/ListSlidetexts.php',
+        'App\\Filament\\Resources\\UserResource' => __DIR__ . '/../..' . '/app/Filament/Resources/UserResource.php',
+        'App\\Filament\\Resources\\UserResource\\Pages\\CreateUser' => __DIR__ . '/../..' . '/app/Filament/Resources/UserResource/Pages/CreateUser.php',
+        'App\\Filament\\Resources\\UserResource\\Pages\\EditUser' => __DIR__ . '/../..' . '/app/Filament/Resources/UserResource/Pages/EditUser.php',
+        'App\\Filament\\Resources\\UserResource\\Pages\\ListUsers' => __DIR__ . '/../..' . '/app/Filament/Resources/UserResource/Pages/ListUsers.php',
         'App\\Filament\\Widgets\\ContactMessagesWidget' => __DIR__ . '/../..' . '/app/Filament/Widgets/ContactMessagesWidget.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\RobotsController' => __DIR__ . '/../..' . '/app/Http/Controllers/RobotsController.php',
@@ -947,7 +955,9 @@ class ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396
         'App\\Http\\Controllers\\Site\\Blog\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/Blog/IndexController.php',
         'App\\Http\\Controllers\\Site\\Blogs\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/Blogs/IndexController.php',
         'App\\Http\\Controllers\\Site\\Contact\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/Contact/IndexController.php',
+        'App\\Http\\Controllers\\Site\\Faq\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/Faq/IndexController.php',
         'App\\Http\\Controllers\\Site\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/IndexController.php',
+        'App\\Http\\Controllers\\Site\\Kvkk\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/Kvkk/IndexController.php',
         'App\\Http\\Controllers\\Site\\Page\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/Page/IndexController.php',
         'App\\Http\\Controllers\\Site\\Project\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/Project/IndexController.php',
         'App\\Http\\Controllers\\Site\\Projects\\IndexController' => __DIR__ . '/../..' . '/app/Http/Controllers/Site/Projects/IndexController.php',
@@ -958,6 +968,7 @@ class ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396
         'App\\Http\\Controllers\\SitemapController' => __DIR__ . '/../..' . '/app/Http/Controllers/SitemapController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
+        'App\\Http\\Middleware\\CheckMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckMaintenanceMode.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
@@ -966,10 +977,15 @@ class ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Livewire\\ChatPanel' => __DIR__ . '/../..' . '/app/Livewire/ChatPanel.php',
+        'App\\Mail\\ContactFormSender' => __DIR__ . '/../..' . '/app/Mail/ContactFormSender.php',
+        'App\\Mail\\ContactFormSubmitted' => __DIR__ . '/../..' . '/app/Mail/ContactFormSubmitted.php',
         'App\\Models\\About' => __DIR__ . '/../..' . '/app/Models/About.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Contact' => __DIR__ . '/../..' . '/app/Models/Contact.php',
         'App\\Models\\Data' => __DIR__ . '/../..' . '/app/Models/Data.php',
+        'App\\Models\\Faq' => __DIR__ . '/../..' . '/app/Models/Faq.php',
+        'App\\Models\\Message' => __DIR__ . '/../..' . '/app/Models/Message.php',
         'App\\Models\\News' => __DIR__ . '/../..' . '/app/Models/News.php',
         'App\\Models\\Page' => __DIR__ . '/../..' . '/app/Models/Page.php',
         'App\\Models\\PageContent' => __DIR__ . '/../..' . '/app/Models/PageContent.php',
@@ -981,6 +997,7 @@ class ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\Slidetext' => __DIR__ . '/../..' . '/app/Models/Slidetext.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
+        'App\\PhotoDelete\\HasImageDeleting' => __DIR__ . '/../..' . '/app/PhotoDelete/HasImageDeleting.php',
         'App\\Policies\\RolePolicy' => __DIR__ . '/../..' . '/app/Policies/RolePolicy.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -11224,10 +11241,10 @@ class ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitc056fd60ec0c50b3b471d2e802e5b396::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1b5fa06cab8db64f3be3edf27f3af88a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1b5fa06cab8db64f3be3edf27f3af88a::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit1b5fa06cab8db64f3be3edf27f3af88a::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit1b5fa06cab8db64f3be3edf27f3af88a::$classMap;
 
         }, null, ClassLoader::class);
     }

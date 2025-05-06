@@ -37,7 +37,7 @@
       </div>
 
       <!-- Sayfalama Butonları -->
-<div class="pagination-wrapper mt-5 mb-2">
+<div class="pagination-wrapper mt-5 mb-2 d-flex justify-content-center">
     {{ $portfolio->links() }}
 </div>
    </div>

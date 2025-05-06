@@ -23,9 +23,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Filament\Support\Facades\FilamentAsset;
 use App\Filament\Widgets\ContactMessagesWidget;
 
-
-
-
+use Filament\Navigation\UserMenuItem;
+use App\Models\Message;
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminPanelProvider extends PanelProvider
@@ -38,15 +38,15 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->path('admin')
-            
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->default()
             ->path('admin')
             ->login()
-            ->brandLogo(asset('logo-dark.svg'))
-            ->darkModeBrandLogo(asset('logo-light.svg'))
-            ->brandLogoHeight('50px')
-            ->brandName('Equinoxia Web Yazılım')
-            ->favicon(asset('logo-dark.svg'))
+            ->brandLogo(asset('assets/images/be.svg'))
+            ->darkModeBrandLogo(asset('assets/images/be.svg'))
+            ->brandLogoHeight('40px')
+            ->brandName('3.14 Agency Yönetim Paneli')
+            ->favicon(asset('assets/images/be2.svg'))
             ->colors([
                 'primary' => '#f5900d',
             ])
@@ -72,10 +72,19 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+       
+            
             ->authMiddleware([
                 Authenticate::class,
             ]);
     }
+
+
+   
+    
+    
+    
+    
 
 
 

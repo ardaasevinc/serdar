@@ -25,24 +25,40 @@ class PartnerResource extends Resource
     protected static ?string $modelLabel = 'Partner';
 
     public static function form(Forms\Form $form): Forms\Form
-    {
-        return $form
-            ->schema([
-                TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                FileUpload::make('image')
-                    ->image()
-                    ->directory('partners')
-                    ->helperText('Görseller 122x23 çözünürlüğünde olmalıdır.'),
-                TextInput::make('url')
-                    ->url()
-                    ->maxLength(255),
-                Toggle::make('is_active')
-                    ->label('Active')
-                    ->default(true),
-            ]);
-    }
+{
+    return $form
+        ->schema([
+            Forms\Components\Grid::make(12)
+                ->schema([
+                    Forms\Components\Group::make([
+                        Forms\Components\FileUpload::make('image')
+                        ->disk('uploads')
+                        ->label('Görsel')
+                        ->directory('partners')
+                        ->visibility('public')
+                        ->imagePreviewHeight('250')
+                            ->helperText('Görseller 122x23 çözünürlüğünde olmalıdır.'),
+                    ])
+                    ->columnSpan(4), // Resim 4 kolon
+
+                    Forms\Components\Group::make([
+                        Forms\Components\TextInput::make('name')
+                            ->required()
+                            ->maxLength(255),
+
+                        Forms\Components\TextInput::make('url')
+                            ->url()
+                            ->maxLength(255),
+
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('Active')
+                            ->default(true),
+                    ])
+                    ->columnSpan(8), // Diğer inputlar 8 kolon
+                ]),
+        ]);
+}
+
 
     public static function table(Tables\Table $table): Tables\Table
     {
@@ -54,6 +70,12 @@ class PartnerResource extends Resource
                 ToggleColumn::make('is_active'),
                 TextColumn::make('created_at')->dateTime(),
             ])
+
+            ->emptyStateIcon(asset('custom-empty.svg'))
+            ->emptyStateHeading('Henüz bir iş ortağı eklenmemiş.')
+            ->emptyStateDescription('Bu alana iş ortaklarınızın logosunu ekleyebilirsiniz.')
+
+
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label('Active Partners')

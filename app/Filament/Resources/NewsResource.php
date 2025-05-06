@@ -17,44 +17,52 @@ class NewsResource extends Resource
     protected static ?string $pluralModelLabel = 'Haberler';
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
     protected static ?string $navigationLabel = 'Haberler';
-    protected static ?string $navigationGroup = 'İçerik Yönetimi';
+    protected static ?string $navigationGroup = 'Haber Yönetimi';
     protected static ?string $modelLabel = 'Haberler';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->label('Başlık')
-                    ->required()
-                    ->maxLength(255)
-                    ->columnSpan('full'),
-                Forms\Components\RichEditor::make('content')
-                    ->label('İçerik')
-                    ->required(),
-                FileUpload::make('image')
-                    ->disk('public') // Public disk kullan
-                    ->directory(fn() => strtolower(class_basename(static::getModel()))) // Model ismine göre klasör belirle
-                    ->getUploadedFileNameForStorageUsing(fn($file) => time() . '_' . $file->getClientOriginalName())
-                    ->imagePreviewHeight('250')
-                    ->image()
-                    ->helperText('Lütfen 770x428 çözünürlüklü bir görsel yükleyin.'),
+                Forms\Components\Grid::make(12)
+                    ->schema([
+                        Forms\Components\Group::make([
+                            FileUpload::make('image')
+                                ->disk('uploads')
+                                ->label('Görsel')
+                                ->directory('news')
+                                ->visibility('public')
+                                ->imagePreviewHeight('250')
+                                ->helperText('Lütfen 770x428 çözünürlüklü bir görsel yükleyin.'),
+                        ])
+                            ->columnSpan(4), // Sol: 4 kolon sadece Görsel
 
-                Forms\Components\Select::make('category_id')
-                    ->label('Kategori')
-                    ->relationship('category', 'name') 
-                    ->required()
-                    ->searchable(),
+                        Forms\Components\Group::make([
+                            Forms\Components\TextInput::make('title')
+                                ->label('Başlık')
+                                ->required()
+                                ->maxLength(255)
+                                ->columnSpan('full'),
 
-                Forms\Components\Toggle::make('is_published')
-                    ->label('Yayında mı?')
-                    ->default(false),
+                            Forms\Components\RichEditor::make('content')
+                                ->label('İçerik')
+                                ->required(),
 
+                            Forms\Components\Select::make('category_id')
+                                ->label('Kategori')
+                                ->relationship('category', 'name')
+                                ->required()
+                                ->searchable(),
 
-
-
+                            Forms\Components\Toggle::make('is_published')
+                                ->label('Yayında mı?')
+                                ->default(false),
+                        ])
+                            ->columnSpan(8), // Sağ: 8 kolon diğer her şey
+                    ]),
             ]);
     }
+
 
     public static function table(Table $table): Table
     {
@@ -73,10 +81,10 @@ class NewsResource extends Resource
             ])
 
             ->emptyStateIcon(asset('custom-empty.svg'))
-            ->emptyStateHeading('Henüz bir kayıt eklenmemiş.')
-            ->emptyStateDescription('Bu alana kayıtlarınızı ekleyebilirsiniz.')
+            ->emptyStateHeading('Henüz bir haber eklenmemiş.')
+            ->emptyStateDescription('Bu alana haberlerinizi ekleyebilirsiniz. Unutmayın, kategori eklemeden haber ekleyemezsiniz.')
 
-            
+
             ->actions([
                 Tables\Actions\EditAction::make(),
 

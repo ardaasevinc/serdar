@@ -1,0 +1,19 @@
+
+@config 'tailwind.config.js';
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Login sayfasına arkaplan görseli + blur efekti */
+/* .fi-body.fi-panel-admin {
+    background-image: url('/assets/images/login-bg.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+} */
+
+
+
+

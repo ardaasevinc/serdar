@@ -41,5 +41,18 @@
         @stack('modals')
 
         @livewireScripts
+        
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const chatTrigger = document.querySelector('a[href="#chat-open"]');
+        if (chatTrigger) {
+            chatTrigger.addEventListener('click', function (e) {
+                e.preventDefault();
+                window.dispatchEvent(new CustomEvent('open-chat-panel'));
+            });
+        }
+    });
+</script>
+
     </body>
 </html>

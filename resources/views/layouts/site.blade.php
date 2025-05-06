@@ -1,121 +1,92 @@
 <!DOCTYPE html>
 <html lang="tr">
 
-<head>
 
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>
-        {{ !empty(\App\Models\Settings::getSetting('site_name'))
-            ? \App\Models\Settings::getSetting('site_name')
-            : 'Varsayılan Site Adı' }}
-        |
-        {{ !empty($page_title) ? $page_title : 'Varsayılan Sayfa Başlığı' }}
-    </title>
+    @if (!empty($settings?->site_name))
+        <title>{{ $settings->site_name }}</title>
+    @endif
 
     <!-- Favicon -->
-    @if (!empty(\App\Models\Settings::getSetting('favicon')))
-        <link rel="apple-touch-icon" sizes="180x180"
-            href="{{ asset('storage/' . \App\Models\Settings::getSetting('favicon')) }}" />
-        <link rel="icon" type="image/png" sizes="32x32"
-            href="{{ asset('storage/' . \App\Models\Settings::getSetting('favicon')) }}" />
-        <link rel="icon" type="image/png" sizes="16x16"
-            href="{{ asset('storage/' . \App\Models\Settings::getSetting('favicon')) }}" />
+    @if (!empty($settings?->favicon))
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('uploads/' . $settings->favicon) }}" />
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('uploads/' . $settings->favicon) }}" />
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('uploads/' . $settings->favicon) }}" />
     @endif
     <link rel="manifest" href="{{ asset('assets/images/favicons/site.webmanifest') }}" />
 
     <!-- Meta Description & Keywords -->
-    <meta name="description"
-        content="{{ \App\Models\Settings::getSetting('meta_description', 'Varsayılan Açıklama') }}" />
-    <meta name="keywords"
-        content="{{ \App\Models\Settings::getSetting('meta_keywords', 'Varsayılan Anahtar Kelimeler') }}" />
+    <meta name="description" content="{{ $settings->meta_description ?? 'Varsayılan Açıklama' }}" />
+    <meta name="keywords" content="{{ $settings->meta_keywords ?? 'Varsayılan Anahtar Kelimeler' }}" />
 
     <!-- Google Tag Manager -->
-    @if (!empty(\App\Models\Settings::getSetting('google_tag_manager')))
-        <script async
-            src="https://www.googletagmanager.com/gtag/js?id={{ \App\Models\Settings::getSetting('google_tag_manager') }}">
-        </script>
+    @if (!empty($settings?->google_tag_manager))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $settings->google_tag_manager }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
+            function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-            gtag('config', '{{ \App\Models\Settings::getSetting('google_tag_manager') }}');
+            gtag('config', '{{ $settings->google_tag_manager }}');
         </script>
     @endif
 
     <!-- Google Analytics -->
-    @if (!empty(\App\Models\Settings::getSetting('google_analytics')))
-        <script async
-            src="https://www.googletagmanager.com/gtag/js?id={{ \App\Models\Settings::getSetting('google_analytics') }}">
-        </script>
+    @if (!empty($settings?->google_analytics))
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ $settings->google_analytics }}"></script>
         <script>
             window.dataLayer = window.dataLayer || [];
-
-            function gtag() {
-                dataLayer.push(arguments);
-            }
+            function gtag() { dataLayer.push(arguments); }
             gtag('js', new Date());
-            gtag('config', '{{ \App\Models\Settings::getSetting('google_analytics') }}');
+            gtag('config', '{{ $settings->google_analytics }}');
         </script>
     @endif
 
     <!-- Facebook Pixel -->
-    @if (!empty(\App\Models\Settings::getSetting('facebook_pixel')))
+    @if (!empty($settings?->facebook_pixel))
         <script>
-            ! function(f, b, e, v, n, t, s) {
-                if (f.fbq) return;
-                n = f.fbq = function() {
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return; n = f.fbq = function () {
                     n.callMethod ?
                         n.callMethod.apply(n, arguments) : n.queue.push(arguments)
                 };
-                if (!f._fbq) f._fbq = n;
-                n.push = n;
-                n.loaded = !0;
-                n.version = '2.0';
-                n.queue = [];
-                t = b.createElement(e);
-                t.async = !0;
-                t.src = v;
-                s = b.getElementsByTagName(e)[0];
+                if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+                n.queue = []; t = b.createElement(e); t.async = !0;
+                t.src = v; s = b.getElementsByTagName(e)[0];
                 s.parentNode.insertBefore(t, s)
             }(window, document, 'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '{{ \App\Models\Settings::getSetting('facebook_pixel') }}');
+            fbq('init', '{{ $settings->facebook_pixel }}');
             fbq('track', 'PageView');
         </script>
         <noscript><img height="1" width="1" style="display:none"
-                src="https://www.facebook.com/tr?id={{ \App\Models\Settings::getSetting('facebook_pixel') }}&ev=PageView&noscript=1" /></noscript>
+                src="https://www.facebook.com/tr?id={{ $settings->facebook_pixel }}&ev=PageView&noscript=1" /></noscript>
     @endif
 
     <!-- TikTok Pixel -->
-    @if (!empty(\App\Models\Settings::getSetting('tiktok_pixel')))
+    @if (!empty($settings?->tiktok_pixel))
         <script>
-            (function() {
+            (function () {
                 var ta = document.createElement('script');
                 ta.type = 'text/javascript';
                 ta.async = true;
-                ta.src =
-                    'https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid={{ \App\Models\Settings::getSetting('tiktok_pixel') }}';
+                ta.src = 'https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid={{ $settings->tiktok_pixel }}';
                 var s = document.getElementsByTagName('script')[0];
                 s.parentNode.insertBefore(ta, s);
             })();
         </script>
     @endif
 
-
-
-
-    <!-- fonts -->
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
         rel="stylesheet" crossorigin />
 
-
+    <!-- Vendors Styles -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-select/bootstrap-select.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendors/jquery-ui/jquery-ui.css') }}" />
@@ -132,20 +103,19 @@
     <link rel="stylesheet" href="{{ asset('assets/vendors/owl-carousel/assets/owl.theme.default.min.css') }}" />
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
-
-
-    <!-- template styles -->
+    <!-- Template Styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/ogency.css') }}" />
 
-    @if (!empty(\App\Models\Settings::getSetting('custom_css')))
+    <!-- Custom CSS -->
+    @if (!empty($settings?->custom_css))
         <style>
-            {!! \App\Models\Settings::getSetting('custom_css') !!}
+            {!! $settings->custom_css !!}
         </style>
     @endif
-
-
-
 </head>
+
+
+
 
 <body class="custom-cursor">
 
@@ -157,82 +127,72 @@
         @include('components.header')
 
         @yield('content')
+
         <!-- Call To Action Start -->
-        <section class="cta-one">
+        <section class="cta-one pt-5">
             <div class="container text-center wow fadeInUp animated" data-wow-delay="200ms">
                 <div class="cta-one__author">
-                    <div class="cta-one__author--wrap"><img src="{{ asset('assets/images/resources/photo91.png') }}"
-                            loading="lazy" alt="ogency">
+                    <div class="cta-one__author--wrap">
+                        <img src="{{ asset('assets/images/resources/photo91.png') }}" loading="lazy" alt="ogency">
                     </div>
-                    <a href="contact.html" class="cta-one__icon"><span class="icon-arrow-long"></span></a>
-                </div><!-- cta-author -->
+                    <a href="{{ route('site.contact') }}" class="cta-one__icon">
+                        <span class="icon-arrow-long"></span>
+                    </a>
+                </div>
                 <div class="section-title">
                     <h2 class="section-title__title">Aklında ne var?<br> Bizimle iletişime geç.</h2>
-                </div><!-- section-title -->
+                </div>
             </div>
         </section>
         <!-- Call To Action End -->
 
-        <footer class="main-footer" style="background-image: url(assets/images/backgrounds/footer-bg-1.png);">
-            <div class="container">
+        <footer class="main-footer "
+            style="background-image: url('{{ asset('assets/images/backgrounds/footer-bg-1.png') }}');">
+            <div class="container ">
                 <div class="main-footer__top wow fadeInUp animated" data-wow-delay="100ms">
                     <a href="{{ route('site.index') }}" class="main-footer__logo">
-                        @if (!empty(\App\Models\Settings::getSetting('site_logo')))
-                            <img src="{{ asset('uploads/' . \App\Models\Settings::getSetting('site_logo')) }}"
-                                alt="ogency" width="55" height="55">
+                        @if (!empty($settings?->light_logo))
+                            <img src="{{ asset('uploads/' . $settings->light_logo) }}" alt="Logo" width="150" height="55">
                         @endif
+                    </a>
 
-                    </a><!-- /.footer-logo -->
                     <div class="main-footer__social">
-
-                        @if (!empty(\App\Models\Settings::getSetting('twitter_url')))
-                            <a href="{{ \App\Models\Settings::getSetting('twitter_url', '#') }}">
-                                <i class="fab fa-twitter"></i>
-                            </a>
+                        @if (!empty($settings?->twitter_url))
+                            <a href="{{ $settings->twitter_url }}"><i class="fab fa-twitter"></i></a>
                         @endif
 
-                        @if (!empty(\App\Models\Settings::getSetting('facebook_url')))
-                            <a href="{{ \App\Models\Settings::getSetting('facebook_url', '#') }}">
-                                <i class="fab fa-facebook"></i>
-                            </a>
+                        @if (!empty($settings?->facebook_url))
+                            <a href="{{ $settings->facebook_url }}"><i class="fab fa-facebook"></i></a>
                         @endif
 
-                        @if (!empty(\App\Models\Settings::getSetting('pinterest_url')))
-                            <a href="{{ \App\Models\Settings::getSetting('pinterest_url', '#') }}">
-                                <i class="fab fa-pinterest-p"></i>
-                            </a>
+                        @if (!empty($settings?->instagram_url))
+                            <a href="{{ $settings->instagram_url }}"><i class="fab fa-instagram"></i></a>
                         @endif
-
-                        @if (!empty(\App\Models\Settings::getSetting('instagram_url')))
-                            <a href="{{ \App\Models\Settings::getSetting('instagram_url', '#') }}">
-                                <i class="fab fa-instagram"></i>
-                            </a>
+                        @if (!empty($settings?->site_phone))
+                            <a href="https://wa.me/{{ $settings->site_phone }}"><i class="fab fa-whatsapp"></i></a>
                         @endif
-                    </div><!-- /.footer-social -->
+                    </div>
+                </div>
 
-
-                </div><!-- footer-top -->
                 <div class="row">
                     <div class="col-lg-8 col-md-6 wow fadeInUp animated" data-wow-delay="200ms">
                         <div class="main-footer__about">
-                            @if (!empty(\App\Models\Settings::getSetting('meta_title')))
-                                <p class="footer-widget__text">{{ \App\Models\Settings::getSetting('meta_title') }}
-                                </p>
+                            @if (!empty($settings?->meta_title))
+                                <p class="footer-widget__text">{{ $settings->meta_title }}</p>
                             @endif
 
-                            @if (!empty(\App\Models\Settings::getSetting('site_email')))
-                                <a href="mailto:{{ \App\Models\Settings::getSetting('site_email') }}">
-                                    {{ \App\Models\Settings::getSetting('site_email') }}
-                                </a>
+                            @if (!empty($settings?->site_email))
+                                <a href="mailto:{{ $settings->site_email }}">{{ $settings->site_email }}</a>
                             @endif
-
-                        </div><!-- /.footer-widget -->
+                        </div>
                     </div>
+
                     <div class="col-lg-2 col-md-3 wow fadeInUp animated" data-wow-delay="300ms">
                         <div class="main-footer__navmenu">
-
-                        </div><!-- /.footer-widget -->
+                            <!-- Boş bırakılmış, istersen buraya ek menü gelebilir -->
+                        </div>
                     </div>
+
                     <div class="col-lg-2 col-md-3 wow fadeInUp animated" data-wow-delay="400ms">
                         <div class="main-footer__navmenu">
                             <ul>
@@ -241,94 +201,80 @@
                                 <li><a href="{{ route('site.services') }}">Hizmetlerimiz</a></li>
                                 <li><a href="{{ route('site.blog') }}">Bloglar</a></li>
                                 <li><a href="{{ route('site.contact') }}">Bize Ulaşın</a></li>
-                            </ul><!-- /.list-unstyled -->
-                        </div><!-- /.footer-widget -->
+                            </ul>
+                        </div>
                     </div>
-                </div><!-- /.row -->
-                <p class="main-footer__copyright wow fadeInUp animated" data-wow-delay="500ms">© Copyright <span
-                        class="dynamic-year"></span><!-- /.dynamic-year --> by <a
-                        href="{{ route('site.index') }}">Arda Sevinç
-                    </a></p>
-            </div><!-- /.container -->
-        </footer><!-- /.main-footer -->
+                </div>
 
-    </div><!-- /.page-wrapper -->
+                <p class="main-footer__copyright wow fadeInUp animated" data-wow-delay="500ms">
+                    © Copyright <span class="dynamic-year"></span> by
+                    <a href="{{ route('site.index') }}">3.14 Agency</a>
+                </p>
+            </div>
+        </footer>
+    </div>
 
-
+    <!-- Mobile Menu -->
     <div class="mobile-nav__wrapper" id="iletisim">
         <div class="mobile-nav__overlay mobile-nav__toggler"></div>
-        <!-- /.mobile-nav__overlay -->
         <div class="mobile-nav__content">
             <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
+
             <div class="logo-box">
-                @if (!empty(\App\Models\Settings::getSetting('site_logo')))
+                @if (!empty($settings?->light_logo))
                     <a href="{{ route('site.index') }}" loading="lazy" aria-label="logo image">
-                        <img src="{{ asset('uploads/' . \App\Models\Settings::getSetting('site_logo')) }}"
-                            width="36" alt="ogency" />
+                        <img src="{{ asset('uploads/' . $settings->light_logo) }}" width="150" alt="ogency" />
                     </a>
                 @endif
-
             </div>
-            <!-- /.logo-box -->
+
             <div class="mobile-nav__container"></div>
-            <!-- /.mobile-nav__container -->
+
             <ul class="mobile-nav__contact list-unstyled">
-                @if (!empty(\App\Models\Settings::getSetting('site_email')))
+                @if (!empty($settings?->site_email))
                     <li>
                         <i class="fas fa-envelope"></i>
-                        <a href="mailto:{{ \App\Models\Settings::getSetting('site_email') }}">
-                            {{ \App\Models\Settings::getSetting('site_email') }}
-                        </a>
+                        <a href="mailto:{{ $settings->site_email }}">{{ $settings->site_email }}</a>
                     </li>
                 @endif
 
-                @if (!empty(\App\Models\Settings::getSetting('site_phone')))
+                @if (!empty($settings?->site_phone))
                     <li>
                         <i class="icon-phone-call"></i>
-                        <a href="tel:{{ \App\Models\Settings::getSetting('site_phone') }}">
-                            {{ \App\Models\Settings::getSetting('site_phone') }}
-                        </a>
+                        <a href="tel:{{ $settings->site_phone }}">{{ $settings->site_phone }}</a>
                     </li>
                 @endif
+            </ul>
 
-            </ul><!-- /.mobile-nav__contact -->
             <div class="mobile-nav__social">
-                @if (!empty(\App\Models\Settings::getSetting('twitter_url')))
-                    <a href="{{ \App\Models\Settings::getSetting('twitter_url', '#') }}">
-                        <i class="fab fa-twitter"></i>
-                    </a>
+                @if (!empty($settings?->twitter_url))
+                    <a href="{{ $settings->twitter_url }}"><i class="fab fa-twitter"></i></a>
                 @endif
 
-                @if (!empty(\App\Models\Settings::getSetting('facebook_url')))
-                    <a href="{{ \App\Models\Settings::getSetting('facebook_url', '#') }}">
-                        <i class="fab fa-facebook"></i>
-                    </a>
+                @if (!empty($settings?->facebook_url))
+                    <a href="{{ $settings->facebook_url }}"><i class="fab fa-facebook"></i></a>
                 @endif
 
-                @if (!empty(\App\Models\Settings::getSetting('pinterest_url')))
-                    <a href="{{ \App\Models\Settings::getSetting('pinterest_url', '#') }}">
-                        <i class="fab fa-pinterest-p"></i>
-                    </a>
+                @if (!empty($settings?->instagram_url))
+                    <a href="{{ $settings->instagram_url }}"><i class="fab fa-instagram"></i></a>
                 @endif
 
-                @if (!empty(\App\Models\Settings::getSetting('instagram_url')))
-                    <a href="{{ \App\Models\Settings::getSetting('instagram_url', '#') }}">
-                        <i class="fab fa-instagram"></i>
+                @if (!empty($settings?->site_phone))
+                    <a href="https://wa.me/{{ $settings->site_phone }}">
+                        <i class="fab fa-whatsapp"></i>
                     </a>
                 @endif
-            </div><!-- /.mobile-nav__social -->
+            </div>
         </div>
-        <!-- /.mobile-nav__content -->
     </div>
-    <!-- /.mobile-nav__wrapper -->
 
-
+    <!-- Search Popup -->
     <div class="search-popup">
+    
         <div class="search-popup__overlay search-toggler"></div>
-        <!-- /.search-popup__overlay -->
         <div class="search-popup__content">
             <form action="{{ route('site.search') }}" method="GET">
-                <label for="search" class="sr-only">Burada Ara</label><!-- /.sr-only -->
+                <label for="search" class="sr-only">Burada Ara</label>
                 <input type="text" id="search" name="query" value="{{ request('query') }}"
                     placeholder="Ne Aramak İstediniz?..." />
                 <button type="submit" aria-label="search submit" class="ogency-btn">
@@ -336,49 +282,49 @@
                 </button>
             </form>
         </div>
-
-        <!-- /.search-popup__content -->
     </div>
-    <!-- /.search-popup -->
 
-    <!-- back-to-top-start -->
+    </div>
+
+    <!-- Scroll to Top -->
     <a href="#" class="scroll-top">
         <svg class="scroll-top__circle" width="100%" height="100%" viewBox="-1 -1 102 102">
             <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
         </svg>
     </a>
-    <!-- back-to-top-end -->
-    @if (!empty(\App\Models\Settings::getSetting('custom_js')))
+
+    <!-- Custom JS -->
+    @if (!empty($settings?->custom_js))
         <script>
-            {!! \App\Models\Settings::getSetting('custom_js') !!}
+            {!! $settings->custom_js !!}
         </script>
     @endif
 
+</body>
 
 
-
-    <script src="{{ asset('assets/vendors/jquery/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/bootstrap-select/bootstrap-select.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-ui/jquery-ui.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jarallax/jarallax.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-appear/jquery.appear.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-validate/jquery.validate.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/nouislider/nouislider.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/odometer/odometer.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/tiny-slider/tiny-slider.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/wnumb/wNumb.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-circleType/jquery.circleType.js') }}"></script>
-    <script src="{{ asset('assets/vendors/jquery-lettering/jquery.lettering.min.js') }}"></script>
-    <script src="{{ asset('assets/vendors/wow/wow.js') }}"></script>
-    <script src="{{ asset('assets/vendors/isotope/isotope.js') }}"></script>
-    <script src="{{ asset('assets/vendors/countdown/countdown.min.js') }}"></script>
-    <!-- template js -->
-    <script src="{{ asset('assets/js/ogency.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery/jquery-3.5.1.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/bootstrap-select/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-ui/jquery-ui.js') }}"></script>
+<script src="{{ asset('assets/vendors/jarallax/jarallax.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-ajaxchimp/jquery.ajaxchimp.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-appear/jquery.appear.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-circle-progress/jquery.circle-progress.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-validate/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/nouislider/nouislider.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/odometer/odometer.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/tiny-slider/tiny-slider.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/owl-carousel/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/wnumb/wNumb.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-circleType/jquery.circleType.js') }}"></script>
+<script src="{{ asset('assets/vendors/jquery-lettering/jquery.lettering.min.js') }}"></script>
+<script src="{{ asset('assets/vendors/wow/wow.js') }}"></script>
+<script src="{{ asset('assets/vendors/isotope/isotope.js') }}"></script>
+<script src="{{ asset('assets/vendors/countdown/countdown.min.js') }}"></script>
+<!-- template js -->
+<script src="{{ asset('assets/js/ogency.js') }}"></script>
 
 
 </body>

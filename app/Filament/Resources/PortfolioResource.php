@@ -27,28 +27,50 @@ class PortfolioResource extends Resource
     protected static ?string $pluralLabel = 'Portfolyolar';
     protected static ?string $slug = 'portfolio-yonetimi'; // Türkçe karakter sorun yaratabilir, düzelttim
     protected static ?string $modelLabel = 'Portfolio';
-    protected static ?string $navigationGroup = 'İçerik Yönetimi';
+    protected static ?string $navigationGroup = 'Portfolyo Yönetimi';
 
     public static function form(Forms\Form $form): Forms\Form
-    {
-        return $form
-            ->schema([
-                TextInput::make('title')
-                    ->required()
-                    ->maxLength(255),
-                RichEditor::make('description'),
-                Select::make('portfolio_category_id')
-                    ->label('Kategori')
-                    ->options(PortfolioCategory::query()->pluck('name', 'id')) // `toArray()` kaldırıldı
-                    ->searchable()
-                    ->preload(),
-                SpatieMediaLibraryFileUpload::make('images')
-                    ->multiple()
-                    ->image()
-                    ->collection('portfolio_images'),
-                Toggle::make('is_published')->label('Yayında mı?')->default(true), // is_active yerine is_published kullanıldı
-            ]);
-    }
+{
+    return $form
+        ->schema([
+            Forms\Components\Grid::make(12)
+                ->schema([
+                    Forms\Components\Group::make([
+                        SpatieMediaLibraryFileUpload::make('images')
+                            ->multiple()
+                            ->disk('uploads')
+                            ->directory('about')
+                            ->visibility('portfolios')
+                            ->label('Görseller')
+                            ->helperText('Görseller 400x496 çözünürlükte olmalıdır.')
+                            ->imagePreviewHeight('250')
+                            ->image()
+                            ->collection('portfolio_images'),
+                    ])
+                    ->columnSpan(4), // Sol 4 kolon: Çoklu görseller
+
+                    Forms\Components\Group::make([
+                        TextInput::make('title')
+                            ->required()
+                            ->maxLength(255),
+
+                        RichEditor::make('description'),
+
+                        Select::make('portfolio_category_id')
+                            ->label('Kategori')
+                            ->options(PortfolioCategory::query()->pluck('name', 'id'))
+                            ->searchable()
+                            ->preload(),
+
+                        Toggle::make('is_published')
+                            ->label('Yayında mı?')
+                            ->default(true),
+                    ])
+                    ->columnSpan(8), // Sağ 8 kolon: Diğer inputlar
+                ]),
+        ]);
+}
+
 
     public static function table(Tables\Table $table): Tables\Table
     {
@@ -68,6 +90,8 @@ class PortfolioResource extends Resource
             ->emptyStateIcon('heroicon-o-document') 
             ->emptyStateHeading('Henüz bir kayıt eklenmemiş.')
             ->emptyStateDescription('Bu alana kayıtlarınızı ekleyebilirsiniz.')
+
+            
         ->actions([
             Tables\Actions\EditAction::make(),
 

@@ -32,49 +32,88 @@ class ServiceResource extends Resource
     {
         return $form
             ->schema([
-
-
-
-                Select::make('icon')
-                    ->label('İkon Seç')
-                    ->options([
-                        'icon-digital-services' => 'Dijital Hizmetler',
-                        'icon-graphic-design' => 'Tasarım',
-                        'icon-technology' => 'e-Pazarlama',
-                        'icon-web' => 'Web Geliştirme',
-                        'icon-mobile-app' => 'Mobil Uygulama',
-                    ])
-                    ->searchable()
-                    ->helperText('Bir ikon seçin, bu ikon hizmet kartında görünecektir.'),
-
-
-
-                TextInput::make('title')
-                    ->label('Başlık')
-                    ->required()
-                    ->maxLength(255),
-
-
-
-                FileUpload::make('image')
-                    ->label('Görsel')
-                    ->disk('public') // Public disk kullanıyoruz
-                    ->directory('services') // Hizmet görselleri için özel klasör
-                    ->imagePreviewHeight('250')
-                    ->image()
-                    ->nullable()
-                    ->helperText('770x381 ölçüsünde bir görsel yükleyin.'),
-
-                RichEditor::make('content')
-                    ->label('İçerik')
-
-                    ->nullable(),
-
-                    Toggle::make('is_published')
-        ->label('Yayında mı?')
-        ->default(false),
+                Forms\Components\Grid::make(12)
+                    ->schema([
+                        Forms\Components\Group::make([
+                            FileUpload::make('image')
+                                ->label('Görsel')
+                                ->disk('uploads')
+                                ->directory('services')
+                                ->visibility('public')
+                                ->imagePreviewHeight('250')
+                                ->image()
+                                ->nullable()
+                                ->helperText('770x381 ölçüsünde bir görsel yükleyin.'),
+                        ])
+                        ->columnSpan(4), // Sol 4 kolon: Görsel
+    
+                        Forms\Components\Group::make([
+                            Select::make('icon')
+                                ->label('İkon Seç')
+                                ->options([
+                                    'icon-award' => 'Ödül',
+                                    'icon-badge' => 'Rozet',
+                                    'icon-close' => 'Kapat',
+                                    'icon-color-sample' => 'Renk Örneği',
+                                    'icon-complete' => 'Tamamlandı',
+                                    'icon-design' => 'Tasarım',
+                                    'icon-digital-services' => 'Dijital Hizmetler',
+                                    'icon-down-arrow' => 'Aşağı Ok',
+                                    'icon-down-right' => 'Sağ Aşağı Ok',
+                                    'icon-front-end' => 'Ön Yüz Geliştirme',
+                                    'icon-graphic-design' => 'Grafik Tasarım',
+                                    'icon-graphic-design-1' => 'Grafik Tasarım V2',
+                                    'icon-group' => 'Grup',
+                                    'icon-idea' => 'Fikir',
+                                    'icon-job-promotion' => 'İş Terfisi',
+                                    'icon-layers' => 'Katmanlar',
+                                    'icon-left-arrow' => 'Sol Ok',
+                                    'icon-marketing' => 'Pazarlama',
+                                    'icon-magnifying-glass' => 'Büyüteç',
+                                    'icon-minus' => 'Eksi',
+                                    'icon-mobile-app' => 'Mobil Uygulama',
+                                    'icon-mobile-development' => 'Mobil Geliştirme',
+                                    'icon-online-shopping' => 'Online Alışveriş',
+                                    'icon-pdf-file' => 'PDF Dosyası',
+                                    'icon-pen-tool' => 'Kalem Aracı',
+                                    'icon-phone' => 'Telefon',
+                                    'icon-phone-call' => 'Telefon Araması',
+                                    'icon-place' => 'Konum',
+                                    'icon-plus' => 'Artı',
+                                    'icon-recommend' => 'Öneri',
+                                    'icon-right-arrow' => 'Sağ Ok',
+                                    'icon-schedule' => 'Zamanlama',
+                                    'icon-shopping-cart' => 'Alışveriş Sepeti',
+                                    'icon-success' => 'Başarılı',
+                                    'icon-team' => 'Ekip',
+                                    'icon-technology' => 'Teknoloji',
+                                    'icon-tick' => 'Onay İşareti',
+                                    'icon-up-arrow' => 'Yukarı Ok',
+                                    'icon-web-development' => 'Web Geliştirme',
+                                    'icon-wreath' => 'Çelenk',
+                                ])
+                                
+                                ->searchable()
+                                ->helperText('Bir ikon seçin, bu ikon hizmet kartında görünecektir.'),
+    
+                            TextInput::make('title')
+                                ->label('Başlık')
+                                ->required()
+                                ->maxLength(255),
+    
+                            RichEditor::make('content')
+                                ->label('İçerik')
+                                ->nullable(),
+    
+                            Toggle::make('is_published')
+                                ->label('Yayında mı?')
+                                ->default(false),
+                        ])
+                        ->columnSpan(8), // Sağ 8 kolon: Diğer alanlar
+                    ]),
             ]);
     }
+    
 
     public static function table(Table $table): Table
     {

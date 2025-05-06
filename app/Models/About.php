@@ -2,14 +2,24 @@
 
 namespace App\Models;
 
+use App\PhotoDelete\HasImageDeleting;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class About extends Model
 {
-    use HasFactory;
+    use HasFactory, HasImageDeleting;
 
     protected $table = 'about'; // Eğer Laravel varsayılan 'abouts' ismini kullanmasını istemiyorsan
 
-    protected $fillable = ['title', 'content1', 'content2', 'image1', 'image2',' is_published'];
+    protected $fillable = [
+        'title',
+        'content1',
+        'content2',
+        'image1',
+        'image2',
+        'is_published',
+    ];
+
+    protected array $imageFields = ['image1', 'image2']; // Resim alanlarımız burada
 }

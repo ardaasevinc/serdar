@@ -135,5 +135,6 @@
                 })
             </script>
         @endif
+        
     </div>
 </x-filament-panels::layout.base>

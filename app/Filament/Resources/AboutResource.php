@@ -20,54 +20,68 @@ class AboutResource extends Resource
 
     protected static ?string $modelLabel = 'Hakkımızda';
 
-    
+
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->label('Başlık')
-                    ->required()
-                    ->maxLength(255)
-                    ->columnSpan('full'),
-
-                Forms\Components\RichEditor::make('content1')
-                    ->label('İçerik 1')
-                    ->required(),
-
-                Forms\Components\RichEditor::make('content2')
-                    ->label('İçerik 2')
-                    ->nullable(),
-
-                Forms\Components\FileUpload::make('image1')
-                    ->directory(fn() => strtolower(class_basename(static::getModel())))
-                    ->label('Görsel 1')
-                    ->image()
-                    ->directory('about')
-                    ->helperText('Lütfen 400x496 çözünürlüklü bir görsel yükleyin.'),
-
-
-                Forms\Components\FileUpload::make('image2')
-                    ->directory(fn() => strtolower(class_basename(static::getModel())))
-                    ->label('Görsel 2')
-                    ->image()
-                    ->directory('about')
-                ->helperText('Lütfen 290x316 çözünürlüklü bir görsel yükleyin.'),
-
-                Forms\Components\Toggle::make('is_published')
-                    ->label('Yayında mı?')
-                    ->default(false),
+                Forms\Components\Grid::make(12)
+                    ->schema([
+                        Forms\Components\Group::make([
+                            Forms\Components\FileUpload::make('image1')
+                                ->label('Görsel 1')
+                                ->disk('uploads')
+                                ->directory('about')
+                                ->visibility('public')
+                                ->imagePreviewHeight('250')
+                                ->image()
+                                
+                                ->helperText('Lütfen 400x496 çözünürlüklü bir görsel yükleyin.'),
+    
+                            Forms\Components\FileUpload::make('image2')
+                                ->label('Görsel 2')
+                                ->disk('uploads')
+                                ->directory('about')
+                                ->visibility('public')
+                                ->imagePreviewHeight('250')
+                                ->image()
+                                ->helperText('Lütfen 290x316 çözünürlüklü bir görsel yükleyin.'),
+                        ])
+                        ->columnSpan(4), // Görseller sol 4 kolonda
+    
+                        Forms\Components\Group::make([
+                            Forms\Components\TextInput::make('title')
+                                ->label('Başlık')
+                                ->required()
+                                ->maxLength(255)
+                                ->columnSpan('full'),
+    
+                            Forms\Components\RichEditor::make('content1')
+                                ->label('İçerik 1')
+                                ->required(),
+    
+                            Forms\Components\RichEditor::make('content2')
+                                ->label('İçerik 2')
+                                ->nullable(),
+    
+                            Forms\Components\Toggle::make('is_published')
+                                ->label('Yayında mı?')
+                                ->default(false),
+                        ])
+                        ->columnSpan(8), // Diğer içerikler sağ 8 kolonda
+                    ]),
             ]);
     }
+    
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')->label('Başlık')->searchable(),
-                Tables\Columns\ImageColumn::make('image1')->label('Görsel 1'),
-                Tables\Columns\ImageColumn::make('image2')->label('Görsel 2'),
+                Tables\Columns\ImageColumn::make('image1')->label('Görsel 1')->disk('uploads'),
+                Tables\Columns\ImageColumn::make('image2')->label('Görsel 2')->disk('uploads'),
                 Tables\Columns\TextColumn::make('created_at')->label('Eklenme Tarihi')->dateTime(),
             ])
 
@@ -82,7 +96,7 @@ class AboutResource extends Resource
             ->emptyStateHeading('Henüz bir kayıt eklenmemiş.')
             ->emptyStateDescription('Bu alana kayıtlarınızı ekleyebilirsiniz.')
 
-            
+
             ->actions([
                 Tables\Actions\EditAction::make(),
 

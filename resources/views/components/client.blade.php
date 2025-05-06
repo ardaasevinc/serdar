@@ -2,6 +2,8 @@
 <div class="client-carousel @@extraClassName" id="is-ortaklari">
     <div class="container">
         <h5 class="client-carousel__tilte"><span>İş Ortakları</span></h5><!-- section-title -->
+        
+         
         <div class="client-carousel__one ogency-owl__carousel owl-theme owl-carousel"
             data-owl-options='{
             "items": 5,
@@ -40,16 +42,17 @@
             }
             }'>
             
-               
+               @foreach ($partners as $item )
             
             <div class="client-carousel__one__item">
-                @foreach ($partners as $item )
+                
                 <a href="{{ $item->url }}"><img src="{{ asset('uploads/' . $item->image) }}" loading="lazy" alt="ogency"></a>
-                @endforeach
+                
             </div><!-- /.owl-slide-item-->
-           
+           @endforeach
 
         </div><!-- /.thm-owl__slider -->
+        
     </div><!-- /.container -->
 </div><!-- /.client-carousel -->
 @endif

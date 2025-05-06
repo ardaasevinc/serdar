@@ -16,10 +16,10 @@ class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
 
-    protected static ?string $pluralModelLabel = 'Kategori Yönetimi';
+    protected static ?string $pluralModelLabel = 'Haber Kategori Yönetimi';
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static ?string $navigationLabel = 'Kategoriler';
-    protected static ?string $navigationGroup = 'İçerik Yönetimi';
+    protected static ?string $navigationLabel = 'Haber Kategoriler';
+    protected static ?string $navigationGroup = 'Haber Yönetimi';
 
     protected static ?string $modelLabel = 'Kategori';
 
@@ -46,8 +46,8 @@ class CategoryResource extends Resource
             ->filters([])
 
             ->emptyStateIcon(asset('custom-empty.svg'))
-            ->emptyStateHeading('Henüz bir kayıt eklenmemiş.')
-            ->emptyStateDescription('Bu alana kayıtlarınızı ekleyebilirsiniz.')
+            ->emptyStateHeading('Henüz bir Kategori eklenmemiş.')
+            ->emptyStateDescription('Bu alana kategorileriinizi ekleyebilirsiniz.')
 
             
             ->actions([

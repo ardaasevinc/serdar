@@ -2,120 +2,182 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Settings;
-use Filament\Resources\Resource;
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\DeleteAction;
 use App\Filament\Resources\SettingsResource\Pages;
+use App\Filament\Resources\SettingsResource\RelationManagers;
+use App\Models\Settings;
+use Filament\Forms;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SettingsResource extends Resource
 {
     protected static ?string $model = Settings::class;
 
-    protected static ?string $pluralModelLabel = 'Ayarlar';
-    protected static ?string $navigationIcon = 'heroicon-o-cog';
-    protected static ?string $navigationLabel = 'Ayarlar';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static ?string $navigationLabel = 'Site Ayarları';
     protected static ?string $navigationGroup = 'İçerik Yönetimi';
 
     protected static ?string $modelLabel = 'Ayar';
 
     public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Select::make('key')
-                    ->label('Ayar Anahtarı')
-                    ->options([
-                        'site_name' => 'Site Adı',
-                        'site_logo' => 'Site Logosu',
-                        'favicon' => 'Favicon',
-                        'site_email' => 'E-Posta',
-                        'site_phone' => 'Telefon',
-                        'meta_title' => 'Meta Başlık',
-                        'meta_description' => 'Meta Açıklama',
-                        'meta_keywords' => 'Meta Anahtar Kelimeler',
-                        'meta_image' => 'Meta Görseli',
-                        'facebook_url' => 'Facebook URL',
-                        'instagram_url' => 'Instagram URL',
-                        'twitter_url' => 'Twitter URL',
-                        'linkedin_url' => 'LinkedIn URL',
-                        'youtube_url' => 'YouTube URL',
-                        'google_tag_manager' => 'Google Tag Manager',
-                        'google_analytics' => 'Google Analytics',
-                        'facebook_pixel' => 'Facebook Pixel',
-                        'tiktok_pixel' => 'Tiktok Pixel',
-                        'custom_css' => 'Özel CSS',
-                        'custom_js' => 'Özel JS',
-                        'maintenance_mode' => 'Bakım Modu',
-                        'maintenance_message' => 'Bakım Mesajı',
-                    ])
-                    ->live()
-                    ->required(),
+{
+    return $form
+        ->schema([
+            Forms\Components\Grid::make(12)
+                ->schema([
+                    Forms\Components\Card::make()
+                        ->schema([
+                            Forms\Components\FileUpload::make('light_logo')
+                                ->label('Açık Tema Logosu')
+                                ->disk('uploads')
+                                ->directory('Logos')
+                                ->visibility('public')
+                                ->image()
+                                ->imageEditor()
+                                ->imagePreviewHeight(100),
+                            
+                            Forms\Components\FileUpload::make('dark_logo')
+                                ->label('Koyu Tema Logosu')
+                                ->disk('uploads')
+                                ->directory('Logos')
+                                ->visibility('public')
+                                ->image()
+                                ->imageEditor()
+                                ->imagePreviewHeight(100),
+                            
+                            Forms\Components\FileUpload::make('favicon')
+                                ->label('Favicon')
+                                ->disk('uploads')
+                                ->directory('Logos')
+                                ->visibility('public')
+                                ->image()
+                                ->imageEditor()
+                                ->imagePreviewHeight(64),
+                        ])
+                        ->columnSpan(4),
 
-                Textarea::make('value')
-                    ->label('Ayar Değeri')
-                    ->hidden(fn($get) => in_array($get('key'), ['site_logo', 'favicon', 'meta_image']))
-                    ->nullable(),
+                    Forms\Components\Card::make()
+                        ->schema([
+                            Forms\Components\TextInput::make('site_name')
+                                ->label('Site Adı')
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('site_email')
+                                ->label('E-Posta')
+                                ->email()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('site_phone')
+                                ->label('Telefon')
+                                ->tel()
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('meta_title')
+                                ->label('Meta Başlık')
+                                ->maxLength(255),
+                            Forms\Components\Textarea::make('meta_description')
+                                ->label('Meta Açıklama')
+                                ->columnSpanFull(),
+                            Forms\Components\TextInput::make('meta_keywords')
+                                ->label('Meta Anahtar Kelimeler')
+                                ->maxLength(255),
+                            Forms\Components\FileUpload::make('meta_image')
+                                ->label('Meta Görsel')
+                                ->disk('uploads')
+                                ->directory('Gallery')
+                                ->visibility('public')
+                                ->image()
+                                ->imageEditor()
+                                ->imagePreviewHeight(100),
+                            Forms\Components\TextInput::make('facebook_url')
+                                ->label('Facebook URL')
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('instagram_url')
+                                ->label('Instagram URL')
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('twitter_url')
+                                ->label('Twitter URL')
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('linkedin_url')
+                                ->label('LinkedIn URL')
+                                ->maxLength(255),
+                            Forms\Components\TextInput::make('youtube_url')
+                                ->label('YouTube URL')
+                                ->maxLength(255),
+                            Forms\Components\Textarea::make('google_tag_manager')
+                                ->label('Google Tag Manager')
+                                ->columnSpanFull(),
+                            Forms\Components\Textarea::make('google_analytics')
+                                ->label('Google Analytics')
+                                ->columnSpanFull(),
+                            Forms\Components\Textarea::make('facebook_pixel')
+                                ->label('Facebook Pixel')
+                                ->columnSpanFull(),
+                            Forms\Components\Textarea::make('tiktok_pixel')
+                                ->label('TikTok Pixel')
+                                ->columnSpanFull(),
+                            Forms\Components\Textarea::make('custom_css')
+                                ->label('Özel CSS')
+                                ->columnSpanFull(),
+                            Forms\Components\Textarea::make('custom_js')
+                                ->label('Özel JS')
+                                ->columnSpanFull(),
+                            Forms\Components\Toggle::make('maintenance_mode')
+                                ->label('Bakım Modu Aktif mi?')
+                                ->required(),
+                            Forms\Components\Textarea::make('maintenance_message')
+                                ->label('Bakım Mesajı')
+                                ->columnSpanFull(),
+                        ])
+                        ->columnSpan(8),
+                ])
+                ->columns(12),
+        ]);
+}
 
-                // **Resim Yükleme Alanları**
-                FileUpload::make('value')
-                    ->label('Site Logosu')
-                    ->directory('settings')
-                    ->image()
-                    ->visibility('public')
-                    ->hidden(fn($get) => $get('key') !== 'site_logo'),
-
-                FileUpload::make('value')
-                    ->label('Favicon')
-                    ->directory('settings')
-                    ->image()
-                    ->visibility('public')
-                    ->hidden(fn($get) => $get('key') !== 'favicon'),
-
-                FileUpload::make('value')
-                    ->label('Meta Görseli')
-                    ->directory('settings')
-                    ->image()
-                    ->visibility('public')
-                    ->hidden(fn($get) => $get('key') !== 'meta_image'),
-            ]);
-    }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('key')->label('Anahtar')->sortable(),
-                TextColumn::make('value')
-                    ->label('Değer')
-                    ->formatStateUsing(
-                        fn($state, $record) => in_array($record->key, ['site_logo', 'favicon', 'meta_image'])
-                            ? "<img src='/storage/$state' width='50' />"
-                            : $state
-                    )
-                    ->html()
-                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('favicon')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('site_name')
+                    ->searchable(),
+                Tables\Columns\IconColumn::make('maintenance_mode')
+                    ->boolean(),
+               
             ])
-            ->defaultSort('key')
+            ->filters([
+                //
+            ])
             ->actions([
-                EditAction::make(),
-                DeleteAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
             'index' => Pages\ListSettings::route('/'),
+            'create' => Pages\CreateSettings::route('/create'),
             'edit' => Pages\EditSettings::route('/{record}/edit'),
         ];
     }

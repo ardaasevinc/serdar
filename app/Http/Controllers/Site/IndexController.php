@@ -20,10 +20,10 @@ class IndexController extends Controller
         $sliders = Slider::all();
         $about=About::first();
         $partners=Partner::where('is_active',1)->get();
-        $portfolio = Portfolio::where('is_published',1)->get();
+        $portfolio = Portfolio::where('is_published',1)->paginate(4);
         $data=Data::where('is_published',1)->get();
         $about=About::first();
-        $services=Service::all();
+        $services=Service::where('is_published',1)->paginate(4);
         $blog = News::where('is_published', 1)->paginate(3);
         $slidetext = Slidetext::where('is_published',1)->get();
         return view('site.index', compact('sliders','about','partners','portfolio','data','about','services','blog','slidetext','page_title'));

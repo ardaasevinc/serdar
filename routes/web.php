@@ -12,9 +12,13 @@ use App\Http\Controllers\Site\Blogs\IndexController as BlogsController;
 use App\Http\Controllers\Site\Contact\IndexController as ContactController;
 use App\Http\Controllers\Site\Search\IndexController as SearchController;
 use App\Http\Controllers\Site\Page\IndexController as PageController;
+use App\Http\Controllers\Site\Faq\IndexController as FaqController;
+use App\Http\Controllers\Site\Kvkk\IndexController as KvkkController;
 
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\RobotsController;
+use App\Http\Middleware\CheckMaintenanceMode;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,19 +32,27 @@ use App\Http\Controllers\RobotsController;
 */
 
 
+
+Route::middleware([
+    CheckMaintenanceMode::class,
+])->group(function () {
+
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('site.sitemap');
 Route::get('/robots.txt', [RobotsController::class, 'index'])->name('site.robots');
 
 
 
 Route::get('/', [IndexController::class, 'index'])->name('site.index');
-Route::get('/about', [AboutController::class, 'index'])->name('site.about');
-Route::get('/projects', [ProjectsController::class, 'index'])->name('site.projects');
-Route::get('/services', [ServicesController::class, 'index'])->name('site.services');
-Route::get('/blogs', [BlogsController::class, 'index'])->name('site.blog');
-route::get('/contact', [ContactController::class, 'index'])->name('site.contact');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
-route::get('/search', [SearchController::class, 'index'])->name('site.search');
+Route::get('/hakkimizda', [AboutController::class, 'index'])->name('site.about');
+Route::get('/projelerimiz', [ProjectsController::class, 'index'])->name('site.projects');
+Route::get('/hizmetlerimiz', [ServicesController::class, 'index'])->name('site.services');
+Route::get('/haberler', [BlogsController::class, 'index'])->name('site.blog');
+route::get('/bize-ulasin', [ContactController::class, 'index'])->name('site.contact');
+Route::post('/bize-ulasin', [ContactController::class, 'store'])->name('contact.store');
+Route::get('/ara', [SearchController::class, 'index'])->name('site.search');
+Route::get('/sikca-sorulan-sorular', [FaqController::class, 'index'])->name('site.faq');
+Route::get('/kvkk', [KvkkController::class, 'index'])->name('site.kvkk');
+
 
 
 
@@ -52,14 +64,14 @@ Route::get('/page/{slug}', [PageController::class, 'detail'])->name('page-detail
 
 
 
-Route::get('/blog-detail/{id}', [BlogController::class, 'index'])->name('blog-detail');
-Route::get('/project-detail/{id}', [ProjectController::class, 'index'])->name('project-detail');
-Route::get('/service-detail/{id}', [ServiceController::class, 'index'])->name('service-detail');
+Route::get('/haber-datayi/{id}', [BlogController::class, 'index'])->name('blog-detail');
+Route::get('/proje-datayi/{id}', [ProjectController::class, 'index'])->name('project-detail');
+Route::get('/hizmet-detayi/{id}', [ServiceController::class, 'index'])->name('service-detail');
 
 
 
 
-
+});
 
 
 

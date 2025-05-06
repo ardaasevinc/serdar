@@ -1,11 +1,12 @@
+
+
 <header class="main-header" id="main-header">
     <nav class="main-menu">
         <div class="container-fluid">
             <div class="main-menu__logo">
-                @if (!empty(\App\Models\Settings::getSetting('site_logo')))
+                @if (!empty($settings?->light_logo))
                     <a href="{{ route('site.index') }}" loading="lazy" aria-label="logo image">
-                        <img src="{{ asset('uploads/' . \App\Models\Settings::getSetting('site_logo')) }}" width="50"
-                            alt="ogency" />
+                        <img src="{{ asset('uploads/' . $settings->light_logo) }}" width="150" alt="{{ $settings->site_name ?? 'Logo' }}" />
                     </a>
                 @endif
             </div><!-- /.main-menu__logo -->
@@ -15,7 +16,7 @@
                     <li><a href="{{ route('site.index') }}">Anasayfa</a></li>
 
                     @php
-                        // Tüm aktif üst menüleri (type = 'menu') getir
+                        
                         $menus = \App\Models\Page::where('is_published', 1)->where('type', 'menu')->get();
                     @endphp
 
@@ -26,10 +27,10 @@
                             </a>
 
                             @php
-                                // Bu menüye bağlı alt menüleri (type = 'submenu') getir
+                                // Bu menüye bağlı alt menüler
                                 $submenus = \App\Models\Page::where('is_published', 1)
                                     ->where('type', 'submenu')
-                                    ->where('parent_menu_id', $menu->id) // Alt menüleri bağlı olduğu menüye göre getir
+                                    ->where('parent_menu_id', $menu->id)
                                     ->get();
                             @endphp
 
@@ -40,18 +41,6 @@
                                             <a href="{{ route('page-detail', ['slug' => $submenu->slug]) }}">
                                                 {{ $submenu->title }}
                                             </a>
-                                            {{-- @if ($submenu->parent_id == $currentPage->id && $submenu->contents->count())
-                                                <ul class="submenu-content">
-                                                    @foreach ($submenu->contents as $content)
-                                                        <li>
-                                                            <a href="{{ route('page.show', $content->slug) }}">
-                                                                {{ $content->title }}
-                                                            </a>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif --}}
-
                                         </li>
                                     @endforeach
                                 </ul>
@@ -59,10 +48,11 @@
                         </li>
                     @endforeach
 
-                    <li class="dropdown"><a href="{{ route('site.about') }}">Hakkımızda</a></li>
-                    <li class="dropdown"><a href="{{ route('site.services') }}">Hizmetlerimiz</a></li>
-                    <li class="dropdown"><a href="{{ route('site.projects') }}">Projelerimiz</a></li>
-                    <li class="dropdown"><a href="{{ route('site.blog') }}">Blog</a></li>
+                    <li class=""><a href="{{ route('site.about') }}">Hakkımızda</a></li>
+                    <li class=""><a href="{{ route('site.services') }}">Hizmetlerimiz</a></li>
+                    <li class=""><a href="{{ route('site.projects') }}">Projelerimiz</a></li>
+                    <li class=""><a href="{{ route('site.blog') }}">Blog</a></li>
+                    <li class=""><a href="{{ route('site.faq') }}">S.S.S</a></li>
                     <li><a href="{{ route('site.contact') }}">İletişim</a></li>
                 </ul>
             </div><!-- /.main-menu__nav -->

@@ -25,26 +25,78 @@ class DataResource extends Resource
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form->schema([
-            TextInput::make('data')
-                ->numeric()
-                ->required()
-                ->label('Sayı - veri'),
-
-            TextInput::make('title')
-                ->required()
-                ->maxLength(255)
-                ->label('Başlık'),
-
-            TextInput::make('icon')
-                ->required()
-                ->maxLength(255)
-                ->label('İkon'),
-
-            Toggle::make('is_published')
-                ->label('Yayınlandı mı?')
-                ->default(true),
+            Forms\Components\Grid::make(12)
+                ->schema([
+                    Forms\Components\Group::make([
+                        Forms\Components\Select::make('icon')
+                            ->required()
+                            ->label('İkon')
+                            ->options([
+                                'icon-award' => 'Ödül',
+                                'icon-badge' => 'Rozet',
+                                'icon-close' => 'Kapat',
+                                'icon-color-sample' => 'Renk Örneği',
+                                'icon-complete' => 'Tamamlandı',
+                                'icon-design' => 'Tasarım',
+                                'icon-digital-services' => 'Dijital Hizmetler',
+                                'icon-down-arrow' => 'Aşağı Ok',
+                                'icon-down-right' => 'Sağ Aşağı Ok',
+                                'icon-front-end' => 'Ön Yüz Geliştirme',
+                                'icon-graphic-design' => 'Grafik Tasarım',
+                                'icon-graphic-design-1' => 'Grafik Tasarım V2',
+                                'icon-group' => 'Grup',
+                                'icon-idea' => 'Fikir',
+                                'icon-job-promotion' => 'İş Terfisi',
+                                'icon-layers' => 'Katmanlar',
+                                'icon-left-arrow' => 'Sol Ok',
+                                'icon-marketing' => 'Pazarlama',
+                                'icon-magnifying-glass' => 'Büyüteç',
+                                'icon-minus' => 'Eksi',
+                                'icon-mobile-app' => 'Mobil Uygulama',
+                                'icon-mobile-development' => 'Mobil Geliştirme',
+                                'icon-online-shopping' => 'Online Alışveriş',
+                                'icon-pdf-file' => 'PDF Dosyası',
+                                'icon-pen-tool' => 'Kalem Aracı',
+                                'icon-phone' => 'Telefon',
+                                'icon-phone-call' => 'Telefon Araması',
+                                'icon-place' => 'Konum',
+                                'icon-plus' => 'Artı',
+                                'icon-recommend' => 'Öneri',
+                                'icon-right-arrow' => 'Sağ Ok',
+                                'icon-schedule' => 'Zamanlama',
+                                'icon-shopping-cart' => 'Alışveriş Sepeti',
+                                'icon-success' => 'Başarılı',
+                                'icon-team' => 'Ekip',
+                                'icon-technology' => 'Teknoloji',
+                                'icon-tick' => 'Onay İşareti',
+                                'icon-up-arrow' => 'Yukarı Ok',
+                                'icon-web-development' => 'Web Geliştirme',
+                                'icon-wreath' => 'Çelenk',
+                            ]),
+                    ])
+                    ->columnSpan(4),
+                    
+    
+                    Forms\Components\Group::make([
+                        Forms\Components\TextInput::make('data')
+                            ->numeric()
+                            ->required()
+                            ->label('Sayı - veri'),
+    
+                        Forms\Components\TextInput::make('title')
+                            ->required()
+                            ->maxLength(255)
+                            ->label('Başlık'),
+    
+                        Forms\Components\Toggle::make('is_published')
+                            ->label('Yayınlandı mı?')
+                            ->default(true),
+                    ])
+                    ->columnSpan(8), // Sağ 8 kolon (data + title + toggle)
+                ]),
         ]);
     }
+    
 
     public static function table(Tables\Table $table): Tables\Table
     {
@@ -60,6 +112,8 @@ class DataResource extends Resource
             TextColumn::make('icon')
                 ->label('İkon'),
 
+                
+
             BooleanColumn::make('is_published')
                 ->label('Yayınlandı mı?'),
         ])
@@ -68,6 +122,12 @@ class DataResource extends Resource
             Tables\Actions\EditAction::make(),
             Tables\Actions\DeleteAction::make(),
         ])
+
+        ->emptyStateIcon(asset('custom-empty.svg'))
+        ->emptyStateHeading('Henüz bir veri eklenmemiş.')
+        ->emptyStateDescription('Bu alana rakamsal veri ve başlık ekleyebilirsiniz.')
+
+
         ->bulkActions([
             Tables\Actions\DeleteBulkAction::make(),
         ]);

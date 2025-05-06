@@ -60,13 +60,15 @@ class ContactResource extends Resource
                     ->modalDescription('Bu kaydı silmek istediğinizden emin misiniz?')
                     ->modalSubmitActionLabel('Evet, Sil'),
             ])
+
+            ->emptyStateIcon(asset('custom-empty.svg'))
+            ->emptyStateHeading('Henüz bir form gelmemiş.')
+            ->emptyStateDescription('Bu alana iletişim formları gelecek.')
         
             ->bulkActions([
-                ExportBulkAction::make()
-                    ->label('Excel Olarak Dışa Aktar')
-                    ->exporter(ContactExport::class) // Hata burada düzeltildi
-                    ->icon('heroicon-o-newspaper'),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
+            
     }
 
     public static function getRelations(): array

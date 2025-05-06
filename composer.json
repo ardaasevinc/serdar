@@ -14,7 +14,6 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^3.0",
         "maatwebsite/excel": "^3.1",
         "spatie/image-optimizer": "^1.8",
         "spatie/laravel-medialibrary": "^11.12"
@@ -75,4 +74,6 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true
+
+    
 }

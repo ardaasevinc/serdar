@@ -2,7 +2,7 @@
     .pagination .page-link {
         background-color: transparent; /* Mavi */
         color: #333 !important;
-        border: 1px solid #333;
+        border:none
     }
 
     .pagination .page-item.active .page-link {
@@ -11,8 +11,8 @@
     }
 
     .pagination .page-link:hover {
-        background-color: #a8814f;
-        color: #ffffff !important;
+        background-color: transparent;
+        color: #f5900d !important;
     }
 
     .pagination .disabled .page-link {
