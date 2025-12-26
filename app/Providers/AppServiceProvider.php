@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Pagination\Paginator;
 use App\Models\Faq;
 
+use App\Models\Slider;
+use App\Models\About;
+use App\Models\Partner;
+use App\Models\Portfolio;
+use App\Models\Data;
+use App\Models\Service;
+use App\Models\News;
+use App\Models\Slidetext;
+use App\Observers\ModelCacheObserver;
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -29,7 +39,14 @@ class AppServiceProvider extends ServiceProvider
 
         Paginator::useBootstrapFive(); 
 
-       
+        Slider::observe(ModelCacheObserver::class);
+        About::observe(ModelCacheObserver::class);
+        Partner::observe(ModelCacheObserver::class);
+        Portfolio::observe(ModelCacheObserver::class);
+        Data::observe(ModelCacheObserver::class);
+        Service::observe(ModelCacheObserver::class);
+        News::observe(ModelCacheObserver::class);
+        Slidetext::observe(ModelCacheObserver::class);
         
     }
 

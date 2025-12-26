@@ -12,6 +12,7 @@
             </div>
             <div class="contact-one__left text-center">
                 <div class="contact-one__form-box">
+ 
                     <form action="{{ route('contact.store') }}" method="POST" class="contact-one__form">
                         @csrf
 

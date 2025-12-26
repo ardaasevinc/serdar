@@ -15,6 +15,9 @@ return [
 
     'default' => env('MAIL_MAILER', 'smtp'),
 
+    'admin_address' => env('MAIL_USERNAME', 'info@314agency.com'),
+
+
     /*
     |--------------------------------------------------------------------------
     | Mailer Configurations

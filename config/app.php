@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://arda2.test'),
+    'url' => env('APP_URL', 'https://127.0.0.1'),
 
     'asset_url' => env('ASSET_URL'),
 

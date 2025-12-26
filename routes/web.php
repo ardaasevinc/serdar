@@ -47,7 +47,7 @@ Route::get('/hakkimizda', [AboutController::class, 'index'])->name('site.about')
 Route::get('/projelerimiz', [ProjectsController::class, 'index'])->name('site.projects');
 Route::get('/hizmetlerimiz', [ServicesController::class, 'index'])->name('site.services');
 Route::get('/haberler', [BlogsController::class, 'index'])->name('site.blog');
-route::get('/bize-ulasin', [ContactController::class, 'index'])->name('site.contact');
+Route::get('/bize-ulasin', [ContactController::class, 'index'])->name('site.contact');
 Route::post('/bize-ulasin', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/ara', [SearchController::class, 'index'])->name('site.search');
 Route::get('/sikca-sorulan-sorular', [FaqController::class, 'index'])->name('site.faq');

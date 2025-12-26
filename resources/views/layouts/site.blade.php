@@ -80,6 +80,44 @@
         </script>
     @endif
 
+    <style>
+        .gradient-bar {
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #FF2A78, #E1762E, #FF2A78);
+            background-size: 300% 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            animation: gradient-move 1.5s linear infinite;
+        }
+
+        @keyframes gradient-move {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Mobilde gizle */
+        @media (max-width: 768px) {
+            .gradient-bar {
+                display: none;
+            }
+        }
+    </style>
+
+
+    <div class="gradient-bar"></div>
+
+
+
+
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -119,7 +157,17 @@
 
 <body class="custom-cursor">
 
-    <div class="custom-cursor__cursor"></div>
+
+
+   
+
+
+
+
+
+
+    <div class=" custom-cursor__cursor">
+    </div>
     <div class="custom-cursor__cursor-two"></div>
 
     @include('components.preloader')
@@ -270,7 +318,7 @@
 
     <!-- Search Popup -->
     <div class="search-popup">
-    
+
         <div class="search-popup__overlay search-toggler"></div>
         <div class="search-popup__content">
             <form action="{{ route('site.search') }}" method="GET">

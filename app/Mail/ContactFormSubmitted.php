@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Contact;
 
 class ContactFormSubmitted extends Mailable
 {
@@ -12,14 +13,14 @@ class ContactFormSubmitted extends Mailable
 
     public $form;
 
-    public function __construct(array $form)
+    public function __construct(Contact $contact)
     {
-        $this->form = $form;
+        $this->form = $contact;
     }
 
     public function build()
     {
-        return $this->subject('Yeni İletişim Mesajı - 314 Agency')
-                    ->view('site.mail.index');
+        return $this->subject('Yeni İletişim Formu Mesajı')
+            ->view('site.mail.index');
     }
 }
