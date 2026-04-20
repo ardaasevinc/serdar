@@ -47,6 +47,13 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('40px')
             ->brandName('3.14 Agency Yönetim Paneli')
             ->favicon(asset('assets/images/be2.svg'))
+             ->brandLogoHeight('18px')
+            ->font('Google Sans')
+            ->sidebarWidth('250px')
+            ->sidebarCollapsibleOnDesktop()
+            ->maxContentWidth('1000px')
+            ->topNavigation(false)
+            ->breadcrumbs(true)
             ->colors([
                 'primary' => '#f5900d',
             ])
@@ -72,26 +79,26 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-       
-            
+
+
             ->authMiddleware([
                 Authenticate::class,
             ]);
     }
 
 
-   
-    
-    
-    
-    
 
 
 
 
 
-    
 
-        
+
+
+
+
+
+
+
     }
 
