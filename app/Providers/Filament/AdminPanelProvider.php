@@ -54,8 +54,13 @@ class AdminPanelProvider extends PanelProvider
             ->maxContentWidth('1000px')
             ->topNavigation(false)
             ->breadcrumbs(true)
-            ->colors([
-                'primary' => '#f5900d',
+ ->colors([
+                'primary' => '#4285F4',   // --accent-blue
+                'gray' => Color::Zinc,
+                'danger' => '#EA4335',    // --accent-red
+                'warning' => '#F59E0B',
+                'info' => '#4285F4',      // --accent-blue
+                'success' => '#34A853',   // --accent-green
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
