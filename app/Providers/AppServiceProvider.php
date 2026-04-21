@@ -34,19 +34,19 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */ public function boot(): void
     {
-        // $settings = Settings::first();
-        // View::share('settings', $settings);
+        $settings = Settings::first();
+        View::share('settings', $settings);
 
-        // Paginator::useBootstrapFive();
+        Paginator::useBootstrapFive();
 
-        // Slider::observe(ModelCacheObserver::class);
-        // About::observe(ModelCacheObserver::class);
-        // Partner::observe(ModelCacheObserver::class);
-        // Portfolio::observe(ModelCacheObserver::class);
-        // Data::observe(ModelCacheObserver::class);
-        // Service::observe(ModelCacheObserver::class);
-        // News::observe(ModelCacheObserver::class);
-        // Slidetext::observe(ModelCacheObserver::class);
+        Slider::observe(ModelCacheObserver::class);
+        About::observe(ModelCacheObserver::class);
+        Partner::observe(ModelCacheObserver::class);
+        Portfolio::observe(ModelCacheObserver::class);
+        Data::observe(ModelCacheObserver::class);
+        Service::observe(ModelCacheObserver::class);
+        News::observe(ModelCacheObserver::class);
+        Slidetext::observe(ModelCacheObserver::class);
 
     }
 
