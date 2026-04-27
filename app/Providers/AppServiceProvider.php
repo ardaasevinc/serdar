@@ -3,11 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Settings;
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\View;
-use Illuminate\Pagination\Paginator;
 use App\Models\Faq;
-
 use App\Models\Slider;
 use App\Models\About;
 use App\Models\Partner;
@@ -17,8 +13,10 @@ use App\Models\Service;
 use App\Models\News;
 use App\Models\Slidetext;
 use App\Observers\ModelCacheObserver;
-
-
+use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Pagination\Paginator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,26 +30,31 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     */ public function boot(): void
+     */
+    public function boot(): void
     {
-        $settings = Settings::first();
-        View::share('settings', $settings);
-
+        // Bootstrap 5 sayfalama desteğini aktif et
         Paginator::useBootstrapFive();
 
-        Slider::observe(ModelCacheObserver::class);
-        About::observe(ModelCacheObserver::class);
-        Partner::observe(ModelCacheObserver::class);
-        Portfolio::observe(ModelCacheObserver::class);
-        Data::observe(ModelCacheObserver::class);
-        Service::observe(ModelCacheObserver::class);
-        News::observe(ModelCacheObserver::class);
-        Slidetext::observe(ModelCacheObserver::class);
+        /**
+         * Veritabanı tablosu kontrolü:
+         * Migration'lar çalışırken Settings tablosu henüz oluşmadığı için
+         * deploy sırasında hata almanızı engeller.
+         */
+        if (!app()->runningInConsole() || Schema::hasTable('settings')) {
+            $settings = Settings::first();
+            View::share('settings', $settings);
+        }
 
+        // Observer Kayıtları
+        // Not: Tablo kontrolü observer'lar için de güvenli bir yapı sunar
+        if (Schema::hasTable('sliders')) { Slider::observe(ModelCacheObserver::class); }
+        if (Schema::hasTable('abouts')) { About::observe(ModelCacheObserver::class); }
+        if (Schema::hasTable('partners')) { Partner::observe(ModelCacheObserver::class); }
+        if (Schema::hasTable('portfolios')) { Portfolio::observe(ModelCacheObserver::class); }
+        if (Schema::hasTable('data')) { Data::observe(ModelCacheObserver::class); }
+        if (Schema::hasTable('services')) { Service::observe(ModelCacheObserver::class); }
+        if (Schema::hasTable('news')) { News::observe(ModelCacheObserver::class); }
+        if (Schema::hasTable('slidetexts')) { Slidetext::observe(ModelCacheObserver::class); }
     }
-
-
-
-
-
 }
