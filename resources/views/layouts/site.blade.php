@@ -159,7 +159,7 @@
 
 
 
-   
+
 
 
 
@@ -373,6 +373,7 @@
 <script src="{{ asset('assets/vendors/countdown/countdown.min.js') }}"></script>
 <!-- template js -->
 <script src="{{ asset('assets/js/ogency.js') }}"></script>
+<script src="https://cookie.selquor.com/api/embed/SEL-908653" defer></script>
 
 
 </body>
