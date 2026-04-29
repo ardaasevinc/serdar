@@ -12,8 +12,8 @@
             </div>
             <div class="contact-one__left text-center">
                 <div class="contact-one__form-box">
- 
-                    <form action="{{ route('contact.store') }}" method="POST" class="contact-one__form">
+
+                    <form action="{{ route('contact.store') }}" method="POST" class="contact-one__form sel-form-SEL-180724 ">
                         @csrf
 
                         <div class="row">
@@ -48,14 +48,7 @@
                                     <textarea name="message" placeholder="Mesajınızı Yazın" required></textarea>
                                 </div>
 
-                                <div class="col-md-12 text-start">
-                                    <label for="kvkkCheckbox" style="font-size: 14px;">
-                                        <input type="checkbox" id="kvkkCheckbox" name="kvkk_agreement"
-                                            onclick="handleKvkkClick(event)" />
-                                        KVKK Aydınlatma Metni’ni okudum, kişisel verilerimin işlenmesine açık rıza
-                                        gösteriyorum.
-                                    </label>
-                                </div><br><br>
+
                                 <div class="contact-one__btn-box">
                                     <button type="submit" class="ogency-btn">Mesaj Gönder</button>
                                 </div>
@@ -115,38 +108,6 @@
     </section>
     <!--Google Map End-->
 
-<div id="kvkkModal"
-     style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5); z-index:9999;">
-
-
-        <div
-            style="position:relative; width:90%; max-width:700px; margin:5% auto; background:transparent; padding:20px; border-radius:8px;">
-           
-
-            <iframe src="{{ route('site.kvkk') }}" style="width:100%; height:400px; border:none;"></iframe>
-
-            <div class="contact-one__btn-box" style="text-align:right; margin-top:15px;">
-                <button type="button" class="ogency-btn" onclick="acceptKvkk()">Okudum Anladım</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let allowKvkkCheck = false;
-
-        function handleKvkkClick(event) {
-            if (!allowKvkkCheck) {
-                event.preventDefault(); // checkbox işaretlenemesin
-                document.getElementById('kvkkModal').style.display = 'block';
-            }
-        }
-
-        function acceptKvkk() {
-            allowKvkkCheck = true;
-            document.getElementById('kvkkCheckbox').checked = true;
-            document.getElementById('kvkkModal').style.display = 'none';
-        }
-    </script>
 
 
 
