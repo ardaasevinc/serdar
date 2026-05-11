@@ -18,6 +18,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\EditAction;
+use Illuminate\Support\Str;
 
 class PageContentResource extends Resource
 {
@@ -40,7 +41,12 @@ class PageContentResource extends Resource
                         Forms\Components\Group::make([
                             FileUpload::make('image')
                                 ->label('Görsel')
-                                ->image(),
+                                ->disk('uploads')
+                                ->directory('pages')
+                                ->visibility('public')
+                                ->image()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension()),
                         ])
                         ->columnSpan(4), // Sol 4 kolon: Görsel
     

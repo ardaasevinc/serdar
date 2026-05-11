@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class AboutResource extends Resource
 {
@@ -36,9 +37,10 @@ class AboutResource extends Resource
                                 ->visibility('public')
                                 ->imagePreviewHeight('250')
                                 ->image()
-                                
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                                 ->helperText('Lütfen 400x496 çözünürlüklü bir görsel yükleyin.'),
-    
+
                             Forms\Components\FileUpload::make('image2')
                                 ->label('Görsel 2')
                                 ->disk('uploads')
@@ -46,6 +48,8 @@ class AboutResource extends Resource
                                 ->visibility('public')
                                 ->imagePreviewHeight('250')
                                 ->image()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                                 ->helperText('Lütfen 290x316 çözünürlüklü bir görsel yükleyin.'),
                         ])
                         ->columnSpan(4), // Görseller sol 4 kolonda

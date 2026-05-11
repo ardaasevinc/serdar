@@ -45,6 +45,7 @@ class PortfolioResource extends Resource
                             ->helperText('Görseller 400x496 çözünürlükte olmalıdır.')
                             ->imagePreviewHeight('250')
                             ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
                             ->collection('portfolio_images'),
                     ])
                     ->columnSpan(4), // Sol 4 kolon: Çoklu görseller

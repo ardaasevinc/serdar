@@ -17,6 +17,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
+use Illuminate\Support\Str;
 
 class ServiceResource extends Resource
 {
@@ -42,6 +43,8 @@ class ServiceResource extends Resource
                                 ->visibility('public')
                                 ->imagePreviewHeight('250')
                                 ->image()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                                 ->nullable()
                                 ->helperText('770x381 ölçüsünde bir görsel yükleyin.'),
                         ])

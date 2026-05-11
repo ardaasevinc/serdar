@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Str;
 
 class SettingsResource extends Resource
 {
@@ -39,8 +40,10 @@ class SettingsResource extends Resource
                                 ->visibility('public')
                                 ->image()
                                 ->imageEditor()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/x-icon', 'image/svg+xml'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                                 ->imagePreviewHeight(100),
-                            
+
                             Forms\Components\FileUpload::make('dark_logo')
                                 ->label('Koyu Tema Logosu')
                                 ->disk('uploads')
@@ -48,8 +51,10 @@ class SettingsResource extends Resource
                                 ->visibility('public')
                                 ->image()
                                 ->imageEditor()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/x-icon', 'image/svg+xml'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                                 ->imagePreviewHeight(100),
-                            
+
                             Forms\Components\FileUpload::make('favicon')
                                 ->label('Favicon')
                                 ->disk('uploads')
@@ -57,6 +62,8 @@ class SettingsResource extends Resource
                                 ->visibility('public')
                                 ->image()
                                 ->imageEditor()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/x-icon', 'image/svg+xml'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                                 ->imagePreviewHeight(64),
                         ])
                         ->columnSpan(4),
@@ -90,6 +97,8 @@ class SettingsResource extends Resource
                                 ->visibility('public')
                                 ->image()
                                 ->imageEditor()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                                 ->imagePreviewHeight(100),
                             Forms\Components\TextInput::make('facebook_url')
                                 ->label('Facebook URL')

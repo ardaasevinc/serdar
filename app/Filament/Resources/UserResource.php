@@ -10,6 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\FileUpload;
 use Filament\Resources\Resource;
+use Illuminate\Support\Str;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\BooleanColumn;
@@ -35,6 +36,8 @@ class UserResource extends Resource
                 ->visibility('public')
                 ->image()
                 ->imageEditor()
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                 ->previewable(true)
                 ->columnSpanFull(),
 

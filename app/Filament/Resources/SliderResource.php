@@ -16,6 +16,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Forms\Components\RichEditor;
+use Illuminate\Support\Str;
 
 class SliderResource extends Resource
 {
@@ -40,6 +41,8 @@ class SliderResource extends Resource
                             ->visibility('public')
                             ->imagePreviewHeight('250')
                             ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                            ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                             ->nullable()
                             ->columnSpan(4), // Solda 4 kolon kaplasın
     

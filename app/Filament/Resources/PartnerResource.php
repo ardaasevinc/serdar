@@ -13,6 +13,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Illuminate\Support\Str;
 
 class PartnerResource extends Resource
 {
@@ -37,6 +38,9 @@ class PartnerResource extends Resource
                         ->directory('partners')
                         ->visibility('public')
                         ->imagePreviewHeight('250')
+                        ->image()
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                        ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                             ->helperText('Görseller 122x23 çözünürlüğünde olmalıdır.'),
                     ])
                     ->columnSpan(4), // Resim 4 kolon

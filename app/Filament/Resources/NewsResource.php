@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
 
 class NewsResource extends Resource
 {
@@ -33,6 +34,9 @@ class NewsResource extends Resource
                                 ->directory('news')
                                 ->visibility('public')
                                 ->imagePreviewHeight('250')
+                                ->image()
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/gif'])
+                                ->getUploadedFileNameForStorageUsing(fn ($file): string => Str::uuid() . '.' . $file->guessExtension())
                                 ->helperText('Lütfen 770x428 çözünürlüklü bir görsel yükleyin.'),
                         ])
                             ->columnSpan(4), // Sol: 4 kolon sadece Görsel
