@@ -37,10 +37,10 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->id('admin')
-            ->path('admin')
+            ->path('314agency')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->default()
-            ->path('admin')
+            ->path('314agency')
             ->login()
             ->brandLogo(asset('assets/images/be.svg'))
             ->darkModeBrandLogo(asset('assets/images/be.svg'))
