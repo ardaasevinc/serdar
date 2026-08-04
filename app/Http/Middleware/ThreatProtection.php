@@ -89,11 +89,8 @@ class ThreatProtection
         // 404 sayacı — tarama tespiti (403 sayılmaz: korumalı sayfalar admin'i de banlardı)
         if ($status === 404) {
             $key   = "threat:scan:{$ip}";
+            Cache::add($key, 0, self::SCAN_WINDOW); // anahtar yoksa TTL ile olustur (file/redis uyumlu)
             $count = Cache::increment($key);
-
-            if ($count === 1) {
-                Cache::expire($key, self::SCAN_WINDOW);
-            }
 
             if ($count >= self::SCAN_LIMIT) {
                 $this->ban($ip, "scan_limit:{$count}x404/403");
@@ -103,11 +100,8 @@ class ThreatProtection
         // Login brute force — sadece login path'ında
         if ($status === 422 && str_contains($request->path(), 'login')) {
             $key   = "threat:login:{$ip}";
+            Cache::add($key, 0, self::LOGIN_WINDOW); // anahtar yoksa TTL ile olustur (file/redis uyumlu)
             $count = Cache::increment($key);
-
-            if ($count === 1) {
-                Cache::expire($key, self::LOGIN_WINDOW);
-            }
 
             if ($count >= self::LOGIN_LIMIT) {
                 $this->ban($ip, "brute_force:{$count}x_login");
