@@ -114,16 +114,6 @@
 
     <div class="gradient-bar"></div>
 
-
-
-
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap"
-        rel="stylesheet" crossorigin />
-
     <!-- Vendors Styles -->
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap/css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendors/bootstrap-select/bootstrap-select.min.css') }}" />
@@ -143,6 +133,32 @@
 
     <!-- Template Styles -->
     <link rel="stylesheet" href="{{ asset('assets/css/ogency.css') }}" />
+
+    <style>
+        :root {
+            --apple-system-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --ogency-font: var(--apple-system-font);
+            --heading-font: var(--apple-system-font);
+        }
+
+        body,
+        button,
+        input,
+        textarea,
+        select,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .ogency-btn,
+        .features-two__title,
+        .demos-one__text__title,
+        .features-one__box__title {
+            font-family: var(--apple-system-font) !important;
+        }
+    </style>
 
     <!-- Custom CSS -->
     @if (!empty($settings?->custom_css))

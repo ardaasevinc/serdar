@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Teşekkürler - 314 Agency</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Outfit', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
             background-color: #000;
             color: #fff;
             padding: 40px;
@@ -37,7 +36,7 @@
     </style>
 </head>
 
-<body style="font-family: 'Outfit', sans-serif; background-color: #000; color: #fff; padding: 40px; margin: 0;">
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #000; color: #fff; padding: 40px; margin: 0;">
     <div class="container" style="max-width: 600px; margin: auto;">
 
         {{-- ROW 1: Brand Logo (Sol Üst) --}}
